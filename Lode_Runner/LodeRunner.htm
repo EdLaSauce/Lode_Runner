@@ -8,6 +8,7 @@
     <title>Lode Runner par Caroline Boudreau et Émil Dallaire</title>
     <link rel="stylesheet" type="text/css" href="" />
     <script src="niveau.js" type="text/javascript"></script>
+    <script src="pointage.js" type="text/javascript"></script>
     <!-- Code JavaScript local -->
     <script type="text/javascript">
         let objCanvas = null;
@@ -55,14 +56,15 @@
         }
 
         function dessiner() {
-            dessinerFond();
-            dessinerPlateforme();
+            dessinerContour();
+            dessinerNiveau();
         }
     </script>
+    
 </head>
 
 <body onload="initAnimation()">
-    <canvas id="monCanvas" width="960" height="640" tabIndex="1">
+    <canvas id="monCanvas" width="940" height="710" tabIndex="1">
         Votre navigateur ne supporte pas la balise canvas
     </canvas>
 </body>

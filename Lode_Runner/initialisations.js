@@ -8,6 +8,52 @@ function initMurs(){
 
     
 }
+/*
+    États:
+        0 = marche
+        1 = monter/descendre
+        2 = chuter
+        3 = grimper
+        4 = mort
+*/
+function initObjLodeRunner(){
+    objLodeRunner = new Object();
+    objLodeRunner.nbLingots = 0;
+    objLodeRunner.posX = cellulesX/2 * largeurCellule;
+    objLodeRunner.posY = 14*hauteurCellule;
+    objLodeRunner.nbVies = 5;
+    objLodeRunner.vitesse = largeurCellule/3;
+    objLodeRunner.strCouleur = 'navy';
+    objLodeRunner.etat = 0;
+}
+
+function initObjTabGardes(){
+    tabObjGardes = new Array();
+
+    let nbGardes = objNiveau.numero +2;
+    let objGarde = null;
+    // let tabCouleur = [];
+    for(let i=0;i<nbGardes;i++){
+        objGarde = new Object();
+        //objGarde.posX ;
+        //objGarde.posY ;
+        /*
+            dans une fonction a part, parcourir le tableau de symboles et garder tous les 
+            emplacement OK pour débuter (au dessus d'une passerelle, où aucun objet n'est placé.
+            situé avec les '_') => insérer dans objNiveau.tabEmplacements
+
+            utiliser un random pour chercher l'index d'une position OK dans objNiveau.tabEmplacement. 
+            assigner cette position X et Y au garde si pour chaque garde dans tabObjGardes, 
+            la position n'est pas déjà prise.
+        */
+        objGarde.binLingot = false;
+        objGarde.etat = 0;
+        objGarde.strCouleur = 'red';
+        objGarde.vitesse = largeurCellule/6;
+
+        tabObjGardes.push(objGarde);
+    }
+}
 
 function initObjNiveau(){
     objNiveau = new Object();
@@ -29,7 +75,7 @@ function initObjNiveau(){
         /* 3 */[' ',' ',' ',' ',' ',' ',' ','#','-','-','-','-','-','-','-','-','-','-',' ',' ',' ',' ',' ','*',' ',' ',' ',' '],
         /* 4 */[' ',' ',' ',' ',' ',' ',' ','#',' ',' ',' ',' ','=','=','#',' ',' ',' ','=','=','=','=','=','=','=','#','=','='],
         /* 5 */[' ',' ',' ',' ',' ',' ',' ','#',' ',' ',' ',' ','=','=','#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','#',' ',' '],
-        /* 6 */[' ',' ',' ',' ',' ',' ',' ','#',' ',' ',' ',' ','=','=','#',' ',' ',' ',' ',' ',' ',' ',' ','*',' ','#',' ',' '],
+        /* 6 */[' ',' ',' ',' ',' ',' ',' ','#',' ',' ',' ',' ','=','=','#',' ',' ',' ',' ',' ',' ',' ','*',' ',' ','#',' ',' '],
         /* 7 */['=','=','#','=','=','=','=','=',' ',' ',' ',' ','=','=','=','=','=','=','=','=','#','=','=','=','=','=','=','='],
         /* 8 */[' ',' ','#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','#',' ',' ',' ',' ',' ',' ',' '],
         /* 9 */[' ',' ','#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','#',' ',' ',' ',' ',' ',' ',' '],

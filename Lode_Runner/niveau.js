@@ -34,7 +34,7 @@ function dessinerBrique(){
     objC2D.restore();
 }
 
-function dessinerEchellePartielle(){
+function dessinerEchelle(){
     objC2D.save();
     objC2D.fillStyle= '#336600';
 
@@ -90,26 +90,6 @@ function dessinerBarre(){
     objC2D.restore();
 }
 
-function dessinerPlateforme(){
-    objC2D.save();
-    for(let i = 0;i<5;i++){
-        objC2D.save();
-        objC2D.translate(30*i,0);
-        dessinerBrique();
-       objC2D.restore();
-    }
-    objC2D.restore();
-}
-
-function dessinerEchelleComplete(){
-    for(let y = 0;y<5;y++){
-        objC2D.save();
-        objC2D.translate(0,30*y);
-        dessinerEchellePartielle();
-        objC2D.restore();
-    }
-}
-
 function dessinerNiveau(){
     objC2D.save();
     objC2D.translate(50,50);
@@ -122,8 +102,17 @@ function dessinerNiveau(){
                 case '=':
                     dessinerBrique();
                     break;
-                default:
-                    //dessinerBrique();
+                case '*':
+                    dessinerLingot();
+                    break;
+                case 'B':
+                    dessinerBeton();
+                    break;
+                case '-':
+                    dessinerBarre();
+                    break;
+                case '#':
+                    dessinerEchelle();
                     break;
             }
             objC2D.restore();

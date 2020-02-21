@@ -49,6 +49,20 @@ function dessinerNiveau(){
     objC2D.save();
     objC2D.translate(50,50);
     dessinerFond();
-    dessinerPlateforme();
+    for(let i=0;i<cellulesY;i++){
+        for(let j=0;j<cellulesX;j++){
+            objC2D.save();
+            objC2D.translate(30*j,30*i);
+            switch(objNiveau.tableau[i][j]){
+                case '=':
+                    dessinerBrique();
+                    break;
+                default:
+                    //dessinerBrique();
+                    break;
+            }
+            objC2D.restore();
+        }
+    }
     objC2D.restore();
 }

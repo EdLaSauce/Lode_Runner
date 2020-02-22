@@ -9,7 +9,6 @@ const hauteurCellule = 30;
     ATTENTION! Le niveau doit être dessiné à partir des coordonnées (50,50)
 */
 
-
 function dessinerFond(){
     objC2D.save();
     objC2D.fillStyle = 'black';

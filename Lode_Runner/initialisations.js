@@ -1,5 +1,9 @@
 function initPointage(){
 
+        date=new Date();
+        temps=date.getTime();
+        binEnMarche=true;
+    
 }
 
 function initMurs(){
@@ -20,7 +24,7 @@ function initObjLodeRunner(){
     objLodeRunner = new Object();
     objLodeRunner.nbLingots = 0;
     objLodeRunner.posX = cellulesX/2 * largeurCellule;
-    objLodeRunner.posY = 14*hauteurCellule;
+    objLodeRunner.posY = 14*hauteurCellule +50;
     objLodeRunner.nbVies = 5;
     objLodeRunner.vitesse = largeurCellule/3;
     objLodeRunner.strCouleur = 'navy';
@@ -65,6 +69,7 @@ function initObjNiveau(){
      brique: '='
      barres: '-'
      beton = 'B'
+     Lode Runner ='L'
     */
     objNiveau.numero = 1;
     objNiveau.tableau = [

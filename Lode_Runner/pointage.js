@@ -1,8 +1,6 @@
 
 let minutes = 0;
 let secondes = 0;
-let temps;
-let date;
 let binEnMarche=false;
 let millisecondes=0;
 
@@ -30,13 +28,13 @@ function dessinerPointage() {
     objC2D.fillStyle = 'black';
 
     objC2D.translate(10, 50);
-    objC2D.fillText("Score:0000000", 0, 0);
+    objC2D.fillText("Score: "+objPointage.scoreCumul, 0, 0);
     objC2D.translate((objCanvas.width - 100) / 3, 0);
     objC2D.fillText("Temps:" + String(strTemps), 0, 0);
     objC2D.translate((objCanvas.width - 100) / 3.5, 0);
-    objC2D.fillText("Niveau: 1", 0, 0);
+    objC2D.fillText("Niveau: "+objNiveau.numero, 0, 0);
     objC2D.translate((objCanvas.width - 100) / 5, 0);
-    objC2D.fillText("Vies: 5", 0, 0);
+    objC2D.fillText("Vies: "+objLodeRunner.nbVies, 0, 0);
 
     objC2D.restore();
 }
@@ -76,8 +74,8 @@ function mettreAJourTemps() {
         dateTemp = new Date();
         tempsTemp = dateTemp.getTime();
 
-        intSecEcoulees = tempsTemp - temps;
-        temps = tempsTemp;
+        intSecEcoulees = tempsTemp - objPointage.temps;
+        objPointage.temps = tempsTemp;
 
         millisecondes += intSecEcoulees;
         //console.log(secondes);

@@ -1,0 +1,8 @@
+gardeMort : http://soundbible.com/2067-Blop.html
+gardeDansTrou : http://soundbible.com/1540-Computer-Error-Alert.html
+gameOver : http://soundbible.com/1771-Laser-Cannon.html
+trouCreuser : http://soundbible.com/1636-Power-Up-Ray.html
+trouRempli : http://soundbible.com/1858-Metroid-Door.html
+chute : http://soundbible.com/2063-UFO-Landing.html
+niveauTermine : http://soundbible.com/1823-Winning-Triumphal-Fanfare.html
+perdVie : http://soundbible.com/1744-Shooting-Star.html

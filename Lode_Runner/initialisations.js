@@ -7,6 +7,55 @@ function initPointage(){
     objPointage.scoreCumul = 0;
 }
 
+function initObjSons(){
+    objSons = new Object();
+
+    let objSon = document.createElement('audio');
+    objSon.setAttribute('src','/sons/gameOver.mp3');
+    objSon.load();
+    objSons.gameOver = objSon;
+
+    objSon = document.createElement('audio');
+    objSon.setAttribute('src','/sons/chute.mp3');
+    objSon.load();
+    objSons.chute = objSon;
+
+    objSon = document.createElement('audio');
+    objSon.setAttribute('src','/sons/gardeDansTrou.mp3');
+    objSon.load();
+    objSons.gardeDansTrou = objSon;
+
+    objSon = document.createElement('audio');
+    objSon.setAttribute('src','/sons/gardeMort.mp3');
+    objSon.load();
+    objSons.gardeMort = objSon;
+
+    objSon = document.createElement('audio');
+    objSon.setAttribute('src','/sons/niveauTermine.mp3');
+    objSon.load();
+    objSons.niveauTermine = objSon;
+
+    objSon = document.createElement('audio');
+    objSon.setAttribute('src','/sons/perdVie.mp3');
+    objSon.load();
+    objSons.perdVie = objSon;
+
+    objSon = document.createElement('audio');
+    objSon.setAttribute('src','/sons/ramasserLingot.mp3');
+    objSon.load();
+    objSons.ramasserLingot = objSon;
+
+    objSon = document.createElement('audio');
+    objSon.setAttribute('src','/sons/trouCreuser.mp3');
+    objSon.load();
+    objSons.creuserTrou = objSon;
+
+    objSon = document.createElement('audio');
+    objSon.setAttribute('src','/sons/trouRempli.mp3');
+    objSon.load();
+    objSons.rempliTrou = objSon;
+}
+
 function initMurs(){
     tabObjMurs = new Array();
     let objMur = null;

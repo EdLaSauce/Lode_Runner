@@ -89,17 +89,9 @@ function initObjTabGardes(){
     // let tabCouleur = [];
     for(let i=0;i<nbGardes;i++){
         objGarde = new Object();
-        //objGarde.posX ;
-        //objGarde.posY ;
-        /*
-            dans une fonction a part, parcourir le tableau de symboles et garder tous les 
-            emplacement OK pour débuter (au dessus d'une passerelle, où aucun objet n'est placé.
-            situé avec les '_') => insérer dans objNiveau.tabEmplacements
-
-            utiliser un random pour chercher l'index d'une position OK dans objNiveau.tabEmplacement. 
-            assigner cette position X et Y au garde si pour chaque garde dans tabObjGardes, 
-            la position n'est pas déjà prise.
-        */
+        objGarde.posX;
+        objGarde.posY;
+       assignerPosition(objGarde);
         objGarde.binLingot = false;
         objGarde.etat = 0;
         objGarde.strCouleur = 'red';
@@ -107,6 +99,13 @@ function initObjTabGardes(){
 
         tabObjGardes.push(objGarde);
     }
+
+    //DEBUG
+    /*
+    for(let i = 0;i<tabObjGardes.length;i++){
+        console.log("Garde "+i+" -> X: "+tabObjGardes[i].posX+", Y: "+tabObjGardes[i].posY);
+    }
+    */
 }
 
 function initObjNiveau(){
@@ -116,6 +115,7 @@ function initObjNiveau(){
     Légende
      échelles: '#'
      échelle secrète : '!'
+     emplacement possible gardes : '_'
      lingots: '*'
      brique: '='
      barres: '-'
@@ -127,21 +127,54 @@ function initObjNiveau(){
     objNiveau.tableau = [
         //       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27
         /* 0 */[' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','!',' ',' ',' ',' ',' ',' ',' ',' ',' '],
-        /* 1 */[' ',' ',' ',' ','*',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','!',' ',' ',' ',' ',' ',' ',' ',' ',' '],
+        /* 1 */['_','_','_','_','*','_','_',' ','_','_','_','_','_','_','_',' ',' ',' ','!',' ',' ',' ',' ',' ',' ',' ',' ',' '],
         /* 2 */['=','=','=','=','=','=','=','#','=','=','=','=','=','=','=',' ',' ',' ','!',' ',' ',' ',' ',' ',' ',' ',' ',' '],
-        /* 3 */[' ',' ',' ',' ',' ',' ',' ','#','-','-','-','-','-','-','-','-','-','-','!',' ',' ',' ',' ','*',' ',' ',' ',' '],
+        /* 3 */[' ',' ',' ',' ',' ',' ',' ','#','-','-','-','-','-','-','-','-','-','-','!','_','_','_','_','*','_',' ','_','_'],
         /* 4 */[' ',' ',' ',' ',' ',' ',' ','#',' ',' ',' ',' ','=','=','#',' ',' ',' ','=','=','=','=','=','=','=','#','=','='],
         /* 5 */[' ',' ',' ',' ',' ',' ',' ','#',' ',' ',' ',' ','=','=','#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','#',' ',' '],
-        /* 6 */[' ',' ',' ',' ',' ',' ',' ','#',' ',' ',' ',' ','=','=','#',' ',' ',' ',' ',' ',' ',' ','*',' ',' ','#',' ',' '],
+        /* 6 */['_','_',' ','_','_','_','_','#',' ',' ',' ',' ','=','=','#','_','_','_','_','_',' ','_','*','_','_','#','_','_'],
         /* 7 */['=','=','#','=','=','=','=','=',' ',' ',' ',' ','=','=','=','=','=','=','=','=','#','=','=','=','=','=','=','='],
         /* 8 */[' ',' ','#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','#',' ',' ',' ',' ',' ',' ',' '],
-        /* 9 */[' ',' ','#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','#',' ',' ',' ',' ',' ',' ',' '],
+        /* 9 */['_','_','#','_','_','_','_','_','_',' ','_','_','_','_','_','_','_','_','_','_','#',' ',' ',' ',' ',' ',' ',' '],
         /*10 */['=','=','=','=','=','=','=','=','=','#','=','=','=','=','=','=','=','=','=','=','#',' ',' ',' ',' ',' ',' ',' '],
         /*11 */[' ',' ',' ',' ',' ',' ',' ',' ',' ','#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','#',' ',' ',' ',' ',' ',' ',' '],
-        /*12 */[' ',' ',' ',' ',' ',' ',' ','*',' ','#','-','-','-','-','-','-','-','-','-','-','#',' ',' ',' ','*',' ',' ',' '],
+        /*12 */[' ',' ',' ',' ',' ','_','_','*','_','#','-','-','-','-','-','-','-','-','-','-','#','_','_','_','*','_','_',' '],
         /*13 */[' ',' ',' ',' ','#','=','=','=','=','=','=',' ',' ',' ',' ',' ',' ',' ',' ',' ','=','=','=','=','=','=','=','#'],
         /*14 */[' ',' ',' ',' ','#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','*',' ',' ',' ',' ',' ',' ',' ',' ','#'],
         /*15 */['=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','='],
         /*16 */['B','B','B','B','B','B','B','B','B','B','B','B','B','B','B','B','B','B','B','B','B','B','B','B','B','B','B','B']
         ];
+    objNiveau.tabEmplacements = new Array();
+    emplacementsDepart();
+}
+
+function emplacementsDepart(){
+    const tableau = objNiveau.tableau;
+    for(let i=0;i<tableau.length;i++){
+        for(let j=0;j<tableau[i].length;j++){
+            if(tableau[i][j]=="_"){
+                objNiveau.tabEmplacements.push([j,i]);
+            }
+        }
+    }
+}
+
+function assignerPosition(objGarde){
+    let random = Math.floor(Math.random()*objNiveau.tabEmplacements.length);
+    console.log("random: "+random);
+    let posX = objNiveau.tabEmplacements[random][0];
+    let posY = objNiveau.tabEmplacements[random][1];
+    console.log("X: "+posX+" , Y: "+posY);
+    let binDejaAssigne = false;
+   for(let i = 0; i < tabObjGardes.length;i++){
+       if(tabObjGardes[i].posX == posX && tabObjGardes[i].posY == posY){
+        binDejaAssigne = true;
+       }
+   }
+   if(binDejaAssigne){
+       assignerPosition();
+   }else{
+       objGarde.posX = posX;
+       objGarde.posY = posY;
+   }
 }

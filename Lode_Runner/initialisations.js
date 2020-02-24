@@ -73,7 +73,7 @@ function initMurs(){
 function initObjLodeRunner(){
     objLodeRunner = new Object();
     objLodeRunner.nbLingots = 0;
-    objLodeRunner.posX = cellulesX/2 * largeurCellule;
+    objLodeRunner.posX = cellulesX/2 * largeurCellule+50;
     objLodeRunner.posY = 14*hauteurCellule +50;
     objLodeRunner.nbVies = 5;
     objLodeRunner.vitesse = largeurCellule/3;
@@ -94,18 +94,11 @@ function initObjTabGardes(){
        assignerPosition(objGarde);
         objGarde.binLingot = false;
         objGarde.etat = 0;
-        objGarde.strCouleur = 'red';
+        objGarde.strCouleur = 'red'; // Couleur différente pour chaque garde ?
         objGarde.vitesse = largeurCellule/6;
 
         tabObjGardes.push(objGarde);
     }
-
-    //DEBUG
-    /*
-    for(let i = 0;i<tabObjGardes.length;i++){
-        console.log("Garde "+i+" -> X: "+tabObjGardes[i].posX+", Y: "+tabObjGardes[i].posY);
-    }
-    */
 }
 
 function initObjNiveau(){
@@ -174,7 +167,7 @@ function assignerPosition(objGarde){
    if(binDejaAssigne){
        assignerPosition();
    }else{
-       objGarde.posX = posX;
-       objGarde.posY = posY;
+       objGarde.posX = posX*largeurCellule+50;
+       objGarde.posY = posY*hauteurCellule+50;
    }
 }

@@ -1,4 +1,13 @@
+function dessinerGardes(){
+    for(let i=0;i<tabObjGardes.length;i++){
+        dessinerGarde(tabObjGardes[i]);
+    }
+}
 
+/*
+    Modifier les dessins afin que les personnages soient au milieu de leur cellule
+    ajouter 9 aux position X ?
+*/
 
 function dessinerLodeRunner() {
     objC2D.save();
@@ -58,20 +67,18 @@ function dessinerLodeRunner() {
     objC2D.restore();
 }
 
-function dessinerGardes() {
+function dessinerGarde(objGarde) {
     objC2D.save();
 
     objC2D.fillStyle = '#a09794';
 
-    //À changer lorsque nous allons avoir la position aléatoire des gardes
-    objC2D.translate(objLodeRunner.posX - 60, objLodeRunner.posY);
+    objC2D.translate(objGarde.posX, objGarde.posY);
 
     objC2D.beginPath();
     objC2D.arc(6, 6, 5, 0, 2 * Math.PI);
     objC2D.fill();
 
-    // À changer lorsque initObjTabGardes sera appelé pour l'objet tabObjGardes[0].objGarde.strCouleur
-    objC2D.fillStyle = 'red';
+    objC2D.fillStyle = objGarde.strCouleur;
 
     //milieu du corps
     objC2D.fillRect(4, 11, 4.5, 10);

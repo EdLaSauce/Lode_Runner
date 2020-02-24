@@ -55,3 +55,16 @@ function dessinerLodeRunner() {
 
     objC2D.restore();
 }
+
+function dessinerGardes(){
+    objC2D.save();
+
+    objC2D.fillStyle = '#a09794';
+    objC2D.translate(200, 220);
+
+    objC2D.beginPath();
+    objC2D.arc(6, 8, 4, 0, 2 * Math.PI);
+    objC2D.fill();
+    
+    objC2D.restore();
+}

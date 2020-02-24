@@ -28,7 +28,7 @@ function initObjLodeRunner(){
     objLodeRunner.posY = 14*hauteurCellule +50;
     objLodeRunner.nbVies = 5;
     objLodeRunner.vitesse = largeurCellule/3;
-    objLodeRunner.strCouleur = 'navy';
+    objLodeRunner.strCouleur = 'cornflowerblue';
     objLodeRunner.etat = 0;
 }
 

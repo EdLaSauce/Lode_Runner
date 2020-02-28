@@ -4,11 +4,6 @@ function dessinerGardes(){
     }
 }
 
-/*
-    Modifier les dessins afin que les personnages soient au milieu de leur cellule
-    ajouter 9 aux position X ?
-*/
-
 function dessinerLodeRunner() {
     objC2D.save();
 

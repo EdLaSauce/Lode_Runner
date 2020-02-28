@@ -4,9 +4,6 @@ let secondes = 0;
 let binEnMarche=false;
 let millisecondes=0;
 
-/*
-Si tu veux changer la couleur du fond pour le pointage, tu peux :)
-*/
 function dessinerPointage() {
     objC2D.save();
     let strTemps = minutes + ':' + secondes;
@@ -70,7 +67,7 @@ function mettreAJourTemps() {
     minutes = parseInt(minutes);
     secondes = parseInt(secondes);
 
-    if (binEnMarche) {
+    if (objPointage.binEnMarche) {
         dateTemp = new Date();
         tempsTemp = dateTemp.getTime();
 

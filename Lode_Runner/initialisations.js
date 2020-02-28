@@ -3,7 +3,7 @@ function initPointage(){
    
     objPointage = new Object();
     objPointage.temps= date.getTime();
-    objPointage.binEnMarche=false;
+    objPointage.binEnMarche;
     objPointage.scoreCumul = 0;
 }
 
@@ -76,7 +76,7 @@ function initObjLodeRunner(){
     objLodeRunner.posX = cellulesX/2 * largeurCellule+50;
     objLodeRunner.posY = 14*hauteurCellule +50;
     objLodeRunner.nbVies = 5;
-    objLodeRunner.vitesse = largeurCellule/3;
+    objLodeRunner.vitesse = largeurCellule/15;
     objLodeRunner.strCouleur = 'cornflowerblue';
     objLodeRunner.etat = 0;
 }

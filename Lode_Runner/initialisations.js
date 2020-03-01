@@ -73,8 +73,8 @@ function initMurs(){
 function initObjLodeRunner(){
     objLodeRunner = new Object();
     objLodeRunner.nbLingots = 0;
-    objLodeRunner.posX = cellulesX/2 * largeurCellule+50;
-    objLodeRunner.posY = 14*hauteurCellule +50;
+    objLodeRunner.posX = cellulesX/4 * largeurCellule+50;
+    objLodeRunner.posY = 12*hauteurCellule +50;
     objLodeRunner.nbVies = 5;
     objLodeRunner.vitesse = largeurCellule/15;
     objLodeRunner.strCouleur = 'cornflowerblue';

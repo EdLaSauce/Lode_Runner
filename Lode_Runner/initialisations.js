@@ -154,10 +154,10 @@ function emplacementsDepart(){
 
 function assignerPosition(objGarde){
     let random = Math.floor(Math.random()*objNiveau.tabEmplacements.length);
-    console.log("random: "+random);
+    //console.log("random: "+random);
     let posX = objNiveau.tabEmplacements[random][0];
     let posY = objNiveau.tabEmplacements[random][1];
-    console.log("X: "+posX+" , Y: "+posY);
+   // console.log("X: "+posX+" , Y: "+posY);
     let binDejaAssigne = false;
    for(let i = 0; i < tabObjGardes.length;i++){
        if(tabObjGardes[i].posX == posX && tabObjGardes[i].posY == posY){

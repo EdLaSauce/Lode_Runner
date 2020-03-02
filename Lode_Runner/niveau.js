@@ -119,3 +119,11 @@ function dessinerNiveau(){
     }
     objC2D.restore();
 }
+
+function retirerObjet(posX,posY){
+    objNiveau.tableau[posY][posX] = ' ';
+}
+
+function remettreObjet(posX,posY,char){
+    objNiveau.tableau[posY][posX] = char;
+}

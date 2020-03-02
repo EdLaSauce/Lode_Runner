@@ -65,9 +65,9 @@ function initMurs(){
 /*
     États:
         0 = marche
-        1 = monter/descendre
+        1 = monter/descendre (sortir du trou aussi)
         2 = chuter
-        3 = grimper
+        3 = barre franchissement
         4 = mort
 */
 function initObjLodeRunner(){
@@ -76,9 +76,11 @@ function initObjLodeRunner(){
     objLodeRunner.posX = cellulesX/4 * largeurCellule+50;
     objLodeRunner.posY = 12*hauteurCellule +50;
     objLodeRunner.nbVies = 5;
-    objLodeRunner.vitesse = largeurCellule/15;
+    objLodeRunner.vitesse = largeurCellule/6;
     objLodeRunner.strCouleur = 'cornflowerblue';
     objLodeRunner.etat = 0;
+    objLodeRunner.intDirection = 0;
+    objLodeRunner.imageDroiteGauche = 0;
 }
 
 function initObjTabGardes(){

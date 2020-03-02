@@ -7,8 +7,16 @@ function dessinerGardes(){
 function dessinerLodeRunner() {
     objC2D.save();
 
+    
+
     objC2D.fillStyle = '#a09794';
     objC2D.translate(objLodeRunner.posX, objLodeRunner.posY);
+    
+    //Changer de côté ?
+    if(objLodeRunner.intDirection == -1){
+        objC2D.scale(-1,1);
+        objC2D.translate(-30,0);
+    }
 
     objC2D.beginPath();
     objC2D.arc(15, 6, 5, 0, 2 * Math.PI);

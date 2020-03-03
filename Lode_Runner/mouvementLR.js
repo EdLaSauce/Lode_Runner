@@ -6,9 +6,10 @@ let strDirection;
 function gererClavier() {
    event.preventDefault();
     //Appuyer sur une touche pour débuter le jeu
-    if(objPointage.binEnMarche = false){
+    //Sans cette instruction, le temps démarre
+    //if(objPointage.binEnMarche == false){
         objPointage.binEnMarche = true;
-    }
+    //}
 
     switch (event.keyCode) {
         // gauche

@@ -51,20 +51,39 @@ function gererClavier() {
 
 function hautBas(){
     let fltYTemporaire = objLodeRunner.posY + (objLodeRunner.vitesse * objLodeRunner.intDirection);
+    const numCelluleX = Math.round((objLodeRunner.posX-50)/30);
+    const numCelluleY = Math.ceil((fltYTemporaire-50)/30);
     if(objLodeRunner.etat == 3){
         //Barre de franchissement
         objLodeRunner.etat = 2;
         console.log("Je **devrais** tomber de la barre de franchissement");
     }else if(objLodeRunner.etat == 0){
         //Je marchais
-
-        //lorsque je peux monter ou descendre
-        //objLodeRunner.etat = 1;
+        if(objNiveau.tableau[numCelluleY+1][numCelluleX] == '#' && objLodeRunner.intDirection == 1){
+            objLodeRunner.posX = numCelluleX * 30 + 50;
+            objLodeRunner.posY = fltYTemporaire;
+            objLodeRunner.etat =1;
+        }else if(objNiveau.tableau[numCelluleY][numCelluleX] == '#' && objLodeRunner.intDirection == -1){
+            objLodeRunner.posX = numCelluleX * 30 +50;
+            objLodeRunner.posY = fltYTemporaire;
+            objLodeRunner.etat =1;
+        }
     }else if(objLodeRunner.etat == 1){
         //Je suis déjà sur l'échelle
+        if(objNiveau.tableau[numCelluleY][numCelluleX] == '#'){
+            objLodeRunner.posY = fltYTemporaire;
+        }
 
-        //lorsque je suis arrivé en haut ou bas
-        //objLodeRunner.etat = 0;
+        if(objNiveau.tableau[numCelluleY+1][numCelluleX] == '#' && objNiveau.tableau[numCelluleY][numCelluleX]!='#'){
+            console.log("En haut?");
+            objLodeRunner.posY = numCelluleY * 30 +50;
+            objLodeRunner.etat = 0;
+        }else if(objNiveau.tableau[numCelluleY][numCelluleX] == '='){
+            console.log("En bas ?");
+            objLodeRunner.posY = (numCelluleY-1) * 30 + 50;
+            objLodeRunner.etat = 0;
+            //TODO: paufiner le 'snaping', car ça prend un keydown de plus pour 'descendre' de l'échelle
+        }
     }
 }
 
@@ -94,6 +113,9 @@ function gaucheDroite(){
         binPeutBouger = false;
     }
 
+    //TODO: planifier à partir d'une échelle aller sur barre franchissement
+    //TODO: arreter barre de franchissement vers echelle avant qu'il tombe
+
     if(objNiveau.tableau[numCelluleY+1][numCelluleX] == ' '){
         if(objNiveau.tableau[numCelluleY][numCelluleX] == '-'){
             console.log("Je suis sur la barre de franchissement");
@@ -102,6 +124,7 @@ function gaucheDroite(){
             console.log("Je tombe");
             binPeutBouger = false;
             //Mettre coordonnées de lode runner au milieu de la cellule
+            // avant de tomber
             objLodeRunner.posX = numCelluleX * 30 + 50;
             objLodeRunner.etat = 2;
         }
@@ -120,13 +143,14 @@ function chuter(){
     const numCelluleX = Math.round((objLodeRunner.posX-50)/30);
     const numCelluleY = Math.ceil((fltYTemporaire-50)/30);
 
-    if(objNiveau.tableau[numCelluleY][numCelluleX] == ' '){
+    if(objNiveau.tableau[numCelluleY][numCelluleX] == ' '||
+            objNiveau.tableau[numCelluleY][numCelluleX] == '_'){
         objLodeRunner.posY = fltYTemporaire;
     }else if(objNiveau.tableau[numCelluleY][numCelluleX] == 'B'){
         //Dans un trou
     }else if(objNiveau.tableau[numCelluleY][numCelluleX] == '-'){
         objLodeRunner.etat = 3;
-        objLodeRunner.posY = (numCelluleY-1) *30 + 50;
+        objLodeRunner.posY = numCelluleY *30 + 50;
     }else{
         objLodeRunner.etat = 0;
         objLodeRunner.posY = (numCelluleY-1) *30 + 50
@@ -142,14 +166,15 @@ function mettreAJourPositionLR() {
     if(objLodeRunner.etat == 2){
         chuter();
         //play son de la chute
-        //if(objSons.chute.pause()){
+        if(objSons.chute.paused){
+            objSons.chute.currentTime = 0;
             objSons.chute.play();
-        //}
+        }
     }else{
         //stop son de la chute
-        //if(!objSons.chute.pause()){
+        if(!objSons.chute.paused){
             objSons.chute.pause();
-        //}
+        }
     }
     
 }

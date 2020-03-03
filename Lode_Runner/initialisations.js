@@ -3,7 +3,7 @@ function initPointage(){
    
     objPointage = new Object();
     objPointage.temps= date.getTime();
-    objPointage.binEnMarche;
+    objPointage.binEnMarche=false;
     objPointage.scoreCumul = 0;
 }
 
@@ -56,12 +56,6 @@ function initObjSons(){
     objSons.rempliTrou = objSon;
 }
 
-function initMurs(){
-    tabObjMurs = new Array();
-    let objMur = null;
-
-    
-}
 /*
     États:
         0 = marche
@@ -72,7 +66,6 @@ function initMurs(){
 */
 function initObjLodeRunner(){
     objLodeRunner = new Object();
-    objLodeRunner.nbLingots = 0;
     objLodeRunner.posX = cellulesX/2 * largeurCellule+50;
     objLodeRunner.posY = 14*hauteurCellule +50;
     objLodeRunner.nbVies = 5;
@@ -119,6 +112,7 @@ function initObjNiveau(){
     */
     objNiveau.numero = 1;
     objNiveau.scoreNiveau = 0;
+    objNiveau.lingots = 6;
     objNiveau.tableau = [
         //       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27
         /* 0 */[' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','!',' ',' ',' ',' ',' ',' ',' ',' ',' '],
@@ -167,7 +161,7 @@ function assignerPosition(objGarde){
        }
    }
    if(binDejaAssigne){
-       assignerPosition();
+       assignerPosition(objGarde);
    }else{
        objGarde.posX = posX*largeurCellule+50;
        objGarde.posY = posY*hauteurCellule+50;

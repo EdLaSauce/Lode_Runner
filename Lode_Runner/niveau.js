@@ -127,3 +127,42 @@ function retirerObjet(posX,posY){
 function remettreObjet(posX,posY,char){
     objNiveau.tableau[posY][posX] = char;
 }
+
+function echelleSecrete(){
+    if(objNiveau.lingots == 0){
+        for(let y = 0;y<cellulesY; y++){
+            for(let x = 0;x<cellulesX;x++){
+                if(objNiveau.tableau[y][x] == '!'){
+                    objNiveau.tableau[y][x] = '#';
+                    console.log(x+", "+y);
+                }
+            }
+        }
+    }
+}
+
+function niveauReussi(){
+    objPointage.binEnMarche = false;
+    //Ajouter le score au niveau
+    objNiveau.scoreNiveau += 1500;
+    //Ajouter le score du niveau au cumul de score
+    objPointage.scoreCumul += objNiveau.scoreNiveau;
+    //Le numero du prochain niveau
+    const niveauSuivant = objNiveau.numero +1 ;
+    //Garder le nombre de vie de lode runner
+    const viesRestantes = objLodeRunner.nbVies;
+    
+    //Re init le niveau
+    initObjNiveau();
+    objNiveau.numero = niveauSuivant;
+
+    //Re init le temps 
+    //Peut-être non nécessaire
+
+    //Re init lodeRunner
+    initObjLodeRunner();
+    objLodeRunner.nbVies = viesRestantes;
+
+    //Re init les gardes
+    initObjTabGardes();
+}

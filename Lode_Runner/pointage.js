@@ -1,7 +1,6 @@
 
 let minutes = 0;
 let secondes = 0;
-let binEnMarche=false;
 let millisecondes=0;
 
 function dessinerPointage() {
@@ -25,7 +24,7 @@ function dessinerPointage() {
     objC2D.fillStyle = 'black';
 
     objC2D.translate(10, 50);
-    objC2D.fillText("Score: "+objPointage.scoreCumul, 0, 0);
+    objC2D.fillText("Score: "+(objPointage.scoreCumul+objNiveau.scoreNiveau), 0, 0);
     objC2D.translate((objCanvas.width - 100) / 3, 0);
     objC2D.fillText("Temps:" + String(strTemps), 0, 0);
     objC2D.translate((objCanvas.width - 100) / 3.5, 0);

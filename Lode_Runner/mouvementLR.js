@@ -1,21 +1,19 @@
-let intDirection = 0;
-let fltTranslationLR;
-
-let strDirection;
+/*
+    Synopsis: On retrouve les fonctions nécessaire aux mouvements de Lode Runner
+*/
 
 function gererClavier() {
    event.preventDefault();
     //Appuyer sur une touche pour débuter le jeu
-    //Sans cette instruction, le temps démarre
-    //if(objPointage.binEnMarche == false){
+    //Sans cette instruction, le temps démarre au chargement du niveau
+    if(objPointage.binEnMarche == false){
         objPointage.binEnMarche = true;
-    //}
+    }
 
     switch (event.keyCode) {
         // gauche
         case 37:
            if(objLodeRunner.etat == 0 || objLodeRunner.etat == 3){
-            console.log('gauche')
             objLodeRunner.intDirection = -1;
             gaucheDroite();
            }else{
@@ -26,7 +24,6 @@ function gererClavier() {
         // droite
         case 39:
            if(objLodeRunner.etat == 0 || objLodeRunner.etat == 3){
-            console.log('droite')
             objLodeRunner.intDirection = 1;
             gaucheDroite();
            }else{
@@ -43,6 +40,7 @@ function gererClavier() {
 
         //haut
         case 38:
+            console.log("up arrow");
             objLodeRunner.intDirection = -1;
            hautBas();
         break;
@@ -54,10 +52,9 @@ function hautBas(){
     let fltYTemporaire = objLodeRunner.posY + (objLodeRunner.vitesse * objLodeRunner.intDirection);
     const numCelluleX = Math.round((objLodeRunner.posX-50)/30);
     const numCelluleY = Math.ceil((fltYTemporaire-50)/30);
-    if(objLodeRunner.etat == 3){
-        //Barre de franchissement
+    let binNiveauReussi = false;
+    if(objLodeRunner.etat == 3 && fltYTemporaire > objLodeRunner.posY){
         objLodeRunner.etat = 2;
-        console.log("Je **devrais** tomber de la barre de franchissement");
     }else if(objLodeRunner.etat == 0){
         //Je marchais
         if(objNiveau.tableau[numCelluleY+1][numCelluleX] == '#' && objLodeRunner.intDirection == 1){
@@ -71,6 +68,12 @@ function hautBas(){
         }
     }else if(objLodeRunner.etat == 1){
         //Je suis déjà sur l'échelle
+
+        //Suis-je sorti du niveau (gagné) ?
+        if(fltYTemporaire < 50){
+            binNiveauReussi = true;
+        }
+
         if(objNiveau.tableau[numCelluleY][numCelluleX] == '#'){
             objLodeRunner.posY = fltYTemporaire;
         }
@@ -86,6 +89,9 @@ function hautBas(){
             //TODO: paufiner le 'snaping', car ça prend un keydown de plus pour 'descendre' de l'échelle
         }
     }
+    if(binNiveauReussi){
+        niveauReussi();
+    }
 }
 
 function gaucheDroite(){
@@ -94,7 +100,7 @@ function gaucheDroite(){
     let binPeutBouger = true;
     //Vérifications
 
-    //Plus petit que la limite gauche ou droite?
+    //Tester limites du niveau
     if(fltXTemporaire < 50){
         fltXTemporaire = 50;
     }else if(fltXTemporaire > objCanvas.width -(50+largeurCellule)){
@@ -105,13 +111,17 @@ function gaucheDroite(){
     const numCelluleY = Math.round((objLodeRunner.posY-50)/30);
 
     if(objNiveau.tableau[numCelluleY][numCelluleX] == '*'){
-        console.log("J'ai attrapé un lingot!");
         retirerObjet(numCelluleX,numCelluleY);
         objSons.ramasserLingot.play();
+        objNiveau.scoreNiveau += 250;
+        objNiveau.lingots--;
+        echelleSecrete();
     }
 
+    // Vérifier qu'aucun obstacle est dans le chemin
     if(objNiveau.tableau[numCelluleY][numCelluleX] == '='){
         binPeutBouger = false;
+        //TODO: ajuster la position X
     }
 
     //TODO: planifier à partir d'une échelle aller sur barre franchissement
@@ -156,8 +166,6 @@ function chuter(){
         objLodeRunner.etat = 0;
         objLodeRunner.posY = (numCelluleY-1) *30 + 50
     }
-
-    console.log("numCelluleY : "+numCelluleY);
     
 }
 
@@ -177,21 +185,4 @@ function mettreAJourPositionLR() {
             objSons.chute.pause();
         }
     }
-    
-}
-
-
-//Test pour trouver dans le tableau sur quels éléments Lode Runner est.
-function chercherElemTab(){
-    const tableau = objNiveau.tableau;
-    let posXLRTab =Math.round((objLodeRunner.posX-50)/30);
-    let posYLRTab =Math.round((objLodeRunner.posY-50)/30);
-    console.log("fltXLD = "+(objLodeRunner.posX-50)/30 + ", fltYLD = "+(objLodeRunner.posY-50)/30);
-    for (let i = 0; i < tableau.length; i++) {
-        for (let j = 0; j < tableau[i].length; j++) {
-                console.log(tableau[posXLRTab][posYLRTab+1]);
-        }
-    }
-
-    console.log('X: ' + posXLRTab + ' Y: ' + posYLRTab)
 }

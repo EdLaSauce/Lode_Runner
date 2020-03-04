@@ -44,6 +44,20 @@ function gererClavier() {
             objLodeRunner.intDirection = -1;
            hautBas();
         break;
+
+        //touche Z
+        case 90:
+           console.log("Trouer à gauche");
+           objLodeRunner.intDirection = -1;
+           trouerPasserelle();
+        break;
+        
+        //touche X
+        case 88:
+           console.log("Trouer à droite");
+           objLodeRunner.intDirection = 1;
+           trouerPasserelle();
+        break;
     }
 
 }
@@ -149,6 +163,43 @@ function gaucheDroite(){
     }
 }
 
+function trouerPasserelle(){
+    const numCelluleXTrouer = Math.round((objLodeRunner.posX -50) / 30) + objLodeRunner.intDirection;
+    const numCelluleYTrouer = Math.ceil((objLodeRunner.posY-50)/30) +1;
+    let binTrouerPasserelle = false;
+    
+    //Determiner s'il y a une passerelle à l'endroit à trouer
+
+    // Si la requête de trouer est dans les limites du jeu
+    if(numCelluleXTrouer >=0 && numCelluleXTrouer < 28){
+        console.log("Cellule a trouer X: "+numCelluleXTrouer+", cellule a trouer Y: "+numCelluleYTrouer);
+        //Et que c'est une passerelle
+        if(objNiveau.tableau[numCelluleYTrouer][numCelluleXTrouer] == '='){
+            // Et rien ne se trouve au dessus
+            const charAuDessus = objNiveau.tableau[numCelluleYTrouer-1][numCelluleXTrouer];
+            if(charAuDessus != '#' && charAuDessus != '*' && charAuDessus != '-' && charAuDessus != '='){
+                binTrouerPasserelle = true;
+                console.log("Il y a une passerelle à trouer");
+            }
+        }
+    }
+
+    //Si la requête est bonne alors
+    if(binTrouerPasserelle){
+        //Ajouter le 'trou' à l'array de trous
+        /*
+            chaque élément du tabTrous sera créé de cette façon:
+            [0] : celluleY du trou
+            [1] : celluleX du trou
+            [2] : temps depuis création (compteur)
+        */
+       tabTrous.push([numCelluleYTrouer,numCelluleXTrouer,0]);
+
+       //transformer l'etat de lodeRunner à 'creuser un trou'
+       //objLodeRunner.etat = 5;
+    }
+}
+
 function chuter(){
     let fltYTemporaire = objLodeRunner.posY + 1;
     const numCelluleX = Math.round((objLodeRunner.posX-50)/30);
@@ -184,5 +235,10 @@ function mettreAJourPositionLR() {
         if(!objSons.chute.paused){
             objSons.chute.pause();
         }
+    }
+
+    //Faire creuser si l'etat est 5
+    if(objLodeRunner.etat == 5){
+
     }
 }

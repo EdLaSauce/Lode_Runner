@@ -124,7 +124,7 @@ function retirerObjet(posX,posY){
     objNiveau.tableau[posY][posX] = ' ';
 }
 
-function remettreObjet(posX,posY,char){
+function mettreObjet(posX,posY,char){
     objNiveau.tableau[posY][posX] = char;
 }
 
@@ -155,6 +155,9 @@ function niveauReussi(){
     //Re init le niveau
     initObjNiveau();
     objNiveau.numero = niveauSuivant;
+
+    //Re init les trous
+    initTabTrous();
 
     //Re init le temps 
     //Peut-être non nécessaire

@@ -63,6 +63,7 @@ function initObjSons(){
         2 = chuter
         3 = barre franchissement
         4 = mort
+        5 = creuse un trou
 */
 function initObjLodeRunner(){
     objLodeRunner = new Object();
@@ -135,6 +136,10 @@ function initObjNiveau(){
         ];
     objNiveau.tabEmplacements = new Array();
     emplacementsDepart();
+}
+
+function initTabTrous(){
+    tabTrous = new Array();
 }
 
 function emplacementsDepart(){

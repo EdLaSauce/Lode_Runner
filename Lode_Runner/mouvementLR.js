@@ -180,6 +180,8 @@ function trouerPasserelle(){
             if(charAuDessus != '#' && charAuDessus != '*' && charAuDessus != '-' && charAuDessus != '='){
                 binTrouerPasserelle = true;
                 console.log("Il y a une passerelle à trouer");
+
+                mettreAJourTrouerPasserelle(binTrouerPasserelle);
             }
         }
     }
@@ -197,6 +199,31 @@ function trouerPasserelle(){
 
        //transformer l'etat de lodeRunner à 'creuser un trou'
        //objLodeRunner.etat = 5;
+    }
+}
+
+// peut-être à déplacer lorsque cette fonction fonctionnera ?
+//changer de nom ? (il est appelé dans trouerPasserelle )
+//sert à dessiner un jet lorsque LR essaie de trouer une passerelle
+//le dessin ne marche pas pour le moment (mais entre dans la fonction)
+function mettreAJourTrouerPasserelle(binTrouerPasserelle){
+
+    if (binTrouerPasserelle){
+        const numCelluleXTrouer = Math.round((objLodeRunner.posX -50) / 30) + objLodeRunner.intDirection;
+        const numCelluleYTrouer = Math.ceil((objLodeRunner.posY-50)/30) +1;
+    
+        objC2D.save();
+    
+        objC2D.fillStyle = 'yellow';
+        objC2D.translate(numCelluleXTrouer*30+50,numCelluleYTrouer*30+50);
+        console.log(numCelluleXTrouer*30+50,numCelluleYTrouer*30+50);
+
+        //dessin test pour le moment
+         objC2D.fillRect(0,0,30,30);
+
+         // futur dessin en forme de triangle
+    
+        objC2D.restore();
     }
 }
 
@@ -219,6 +246,7 @@ function chuter(){
     }
     
 }
+
 
 function mettreAJourPositionLR() {
 

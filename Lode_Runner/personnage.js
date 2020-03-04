@@ -7,8 +7,6 @@ function dessinerGardes(){
 function dessinerLodeRunner() {
     objC2D.save();
 
-    
-
     objC2D.fillStyle = '#a09794';
     objC2D.translate(objLodeRunner.posX, objLodeRunner.posY);
     

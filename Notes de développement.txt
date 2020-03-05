@@ -8,5 +8,7 @@
                                 des cellules.
                             Ex: mouvementsLR.js ligne: 124 -- TODO
 2020-03-03 | Vérifié par: | Ajuster l'interaction avec les échelles (gauche droite surtout) (passer d'une barre de franchissement à une
-				échelle et vise versa )
+				            échelle et vise versa )
 2020-03-04 | Vérifié par: | Faire une animation de la création du trou
+2020-03-04 | Vérifié par: | Repartir le temps à la fin du niveau dans niveauReussi()
+2020-03-04 | Vérifié par: | Revoir la façon de chuter, car lorsque vis-à-vis un trou dans beton, LR ne tombe pas

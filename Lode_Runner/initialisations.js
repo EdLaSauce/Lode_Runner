@@ -140,6 +140,12 @@ function initObjNiveau(){
 
 function initTabTrous(){
     tabTrous = new Array();
+    setInterval(()=>{
+        tabTrous.forEach(trou => {
+            trou[2]++;
+        });
+    },1000)
+    
 }
 
 function emplacementsDepart(){

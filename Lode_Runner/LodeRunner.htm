@@ -51,6 +51,7 @@
         function mettreAjourAnimation() {
             mettreAJourPositionLR();
             mettreAJourTemps();
+            mettreAJourTrous();
         }
 
         // Un cycle d'animation	
@@ -76,6 +77,9 @@
             dessinerPointage();
             dessinerLodeRunner();
             dessinerGardes();
+            if(objLodeRunner.etat == 5){
+                dessinerJet();
+            }
         }
 
     </script>

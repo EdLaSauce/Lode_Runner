@@ -113,6 +113,9 @@ function dessinerNiveau(){
                 case '#':
                     dessinerEchelle();
                     break;
+                case 'T':
+                    dessinerTrou();
+                    break;
             }
             objC2D.restore();
         }
@@ -120,12 +123,19 @@ function dessinerNiveau(){
     objC2D.restore();
 }
 
-function retirerObjet(posX,posY){
-    objNiveau.tableau[posY][posX] = ' ';
+function dessinerTrou(){
+    objC2D.save();
+    objC2D.fillStyle = 'black';
+    objC2D.fillRect(0,0,30,30);
+    objC2D.restore();
 }
 
-function mettreObjet(posX,posY,char){
-    objNiveau.tableau[posY][posX] = char;
+function retirerObjet(celluleX,celluleY){
+    objNiveau.tableau[celluleY][celluleX] = ' ';
+}
+
+function mettreObjet(celluleX,celluleY,char){
+    objNiveau.tableau[celluleY][celluleX] = char;
 }
 
 function echelleSecrete(){
@@ -142,6 +152,7 @@ function echelleSecrete(){
 }
 
 function niveauReussi(){
+    objSons.niveauTermine.play();
     objPointage.binEnMarche = false;
     //Ajouter le score au niveau
     objNiveau.scoreNiveau += 1500;

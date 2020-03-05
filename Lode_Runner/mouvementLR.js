@@ -141,7 +141,8 @@ function gaucheDroite(){
     //TODO: planifier à partir d'une échelle aller sur barre franchissement
     //TODO: arreter barre de franchissement vers echelle avant qu'il tombe
 
-    if(objNiveau.tableau[numCelluleY+1][numCelluleX] == ' '){
+    if(objNiveau.tableau[numCelluleY+1][numCelluleX] == ' ' || 
+            objNiveau.tableau[numCelluleY+1][numCelluleX] == 'T'){
         if(objNiveau.tableau[numCelluleY][numCelluleX] == '-'){
             console.log("Je suis sur la barre de franchissement");
             objLodeRunner.etat = 3;
@@ -166,7 +167,6 @@ function gaucheDroite(){
 function trouerPasserelle(){
     const numCelluleXTrouer = Math.round((objLodeRunner.posX -50) / 30) + objLodeRunner.intDirection;
     const numCelluleYTrouer = Math.ceil((objLodeRunner.posY-50)/30) +1;
-    let binTrouerPasserelle = false;
     
     //Determiner s'il y a une passerelle à l'endroit à trouer
 
@@ -178,27 +178,26 @@ function trouerPasserelle(){
             // Et rien ne se trouve au dessus
             const charAuDessus = objNiveau.tableau[numCelluleYTrouer-1][numCelluleXTrouer];
             if(charAuDessus != '#' && charAuDessus != '*' && charAuDessus != '-' && charAuDessus != '='){
-                binTrouerPasserelle = true;
+                //Ajouter le 'trou' à l'array de trous
+                /*
+                    chaque élément du tabTrous sera créé de cette façon:
+                    [0] : celluleY du trou
+                    [1] : celluleX du trou
+                    [2] : temps depuis création (compteur)
+                */
+                tabTrous.push([numCelluleYTrouer,numCelluleXTrouer,0]);
+                if(objSons.creuserTrou.duration > 0){
+                    objSons.creuserTrou.currentTime = 0;
+                }
+                objSons.creuserTrou.play();
+                //transformer l'etat de lodeRunner à 'creuser un trou'
+                objLodeRunner.etat = 5;
+                setTimeout(()=>{
+                    objLodeRunner.etat =0;
+                },550);
                 console.log("Il y a une passerelle à trouer");
-
-                mettreAJourTrouerPasserelle(binTrouerPasserelle);
             }
         }
-    }
-
-    //Si la requête est bonne alors
-    if(binTrouerPasserelle){
-        //Ajouter le 'trou' à l'array de trous
-        /*
-            chaque élément du tabTrous sera créé de cette façon:
-            [0] : celluleY du trou
-            [1] : celluleX du trou
-            [2] : temps depuis création (compteur)
-        */
-       tabTrous.push([numCelluleYTrouer,numCelluleXTrouer,0]);
-
-       //transformer l'etat de lodeRunner à 'creuser un trou'
-       //objLodeRunner.etat = 5;
     }
 }
 
@@ -206,24 +205,22 @@ function trouerPasserelle(){
 //changer de nom ? (il est appelé dans trouerPasserelle )
 //sert à dessiner un jet lorsque LR essaie de trouer une passerelle
 //le dessin ne marche pas pour le moment (mais entre dans la fonction)
-function mettreAJourTrouerPasserelle(binTrouerPasserelle){
-
-    if (binTrouerPasserelle){
-        const numCelluleXTrouer = Math.round((objLodeRunner.posX -50) / 30) + objLodeRunner.intDirection;
-        const numCelluleYTrouer = Math.ceil((objLodeRunner.posY-50)/30) +1;
-    
-        objC2D.save();
-    
-        objC2D.fillStyle = 'yellow';
-        objC2D.translate(numCelluleXTrouer*30+50,numCelluleYTrouer*30+50);
-        console.log(numCelluleXTrouer*30+50,numCelluleYTrouer*30+50);
-
-        //dessin test pour le moment
-         objC2D.fillRect(0,0,30,30);
-
-         // futur dessin en forme de triangle
-    
-        objC2D.restore();
+function mettreAJourTrous(){
+    //ICI on doit ajouter 1 au compteur des trous chaque seconde
+    if(tabTrous.length > 0){
+        for(let i =0; i<tabTrous.length;i++){
+            const trou = tabTrous[i];
+            if(trou[2] == 0){
+                mettreObjet(trou[1],trou[0],'T');
+            }
+            if(trou[2] == 7){
+                objSons.rempliTrou.play();
+            }
+            if(trou[2] == 8){
+                mettreObjet(trou[1],trou[0],'=');
+                tabTrous.shift();
+            }
+        }
     }
 }
 
@@ -233,7 +230,8 @@ function chuter(){
     const numCelluleY = Math.ceil((fltYTemporaire-50)/30);
 
     if(objNiveau.tableau[numCelluleY][numCelluleX] == ' '||
-            objNiveau.tableau[numCelluleY][numCelluleX] == '_'){
+            objNiveau.tableau[numCelluleY][numCelluleX] == '_'||
+            objNiveau.tableau[numCelluleY][numCelluleX] == 'T'){
         objLodeRunner.posY = fltYTemporaire;
     }else if(objNiveau.tableau[numCelluleY][numCelluleX] == 'B'){
         //Dans un trou
@@ -244,7 +242,6 @@ function chuter(){
         objLodeRunner.etat = 0;
         objLodeRunner.posY = (numCelluleY-1) *30 + 50
     }
-    
 }
 
 
@@ -263,10 +260,5 @@ function mettreAJourPositionLR() {
         if(!objSons.chute.paused){
             objSons.chute.pause();
         }
-    }
-
-    //Faire creuser si l'etat est 5
-    if(objLodeRunner.etat == 5){
-
     }
 }

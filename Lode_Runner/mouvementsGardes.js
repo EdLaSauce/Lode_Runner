@@ -44,7 +44,7 @@ function bougerVersLodeRunner(objGarde){
                 }
             }
         }
-        console.log("Monter! -> "+"numCelluleBut: "+numCelluleBut)
+        //console.log("Monter! -> "+"numCelluleBut: "+numCelluleBut)
 
         /*
             Comment procéder selon l'état du garde
@@ -89,7 +89,7 @@ function bougerVersLodeRunner(objGarde){
                 }
             }
         }
-        console.log("Descendre! -> "+"numCelluleBut: "+numCelluleBut)
+       // console.log("Descendre! -> "+"numCelluleBut: "+numCelluleBut)
 
         if(objGarde.etat == 0){
             //Si je marche

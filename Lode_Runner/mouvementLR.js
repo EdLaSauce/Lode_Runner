@@ -2,6 +2,7 @@
     Synopsis: On retrouve les fonctions nécessaire aux mouvements de Lode Runner
 */
 
+
 function gererClavier() {
    event.preventDefault();
     //Appuyer sur une touche pour débuter le jeu
@@ -114,8 +115,8 @@ function gaucheDroiteEchelle(){
     const numCelluleY = Math.ceil((fltYTemporaire-50)/30);
 
     console.log('X :' + numCelluleX + ' Y : ' + numCelluleY)
-
-   /* if (objLodeRunner.intDirection == -1){
+/*
+   if (objLodeRunner.intDirection == -1){
         if(objNiveau.tableau[numCelluleY+1][numCelluleX-1] == '='){
             objLodeRunner.posY = numCelluleY * 30 +50;
             objLodeRunner.posX =numCelluleX* 30 + 50;
@@ -126,7 +127,6 @@ function gaucheDroiteEchelle(){
             objLodeRunner.posX =numCelluleX* 30 + 50;
             objLodeRunner.etat=0;
         } else if (objNiveau.tableau[numCelluleY+1][numCelluleX+1] == ' '){
-            objLodeRunner.posX =numCelluleX* 30 + 50;
             objLodeRunner.etat=2;
         }
     }*/
@@ -135,7 +135,7 @@ function gaucheDroiteEchelle(){
 }
 
 function gaucheDroite(){
-    if (objLodeRunner.etat != 2 ){
+   // if (objLodeRunner.etat != 2 ){
      
     let fltXTemporaire = objLodeRunner.posX + (objLodeRunner.vitesse * objLodeRunner.intDirection);
     let binPeutBouger = true;
@@ -186,10 +186,13 @@ function gaucheDroite(){
         objLodeRunner.etat = 0;
     }
 
-    if(binPeutBouger){
+
+    //TODO : lorsque LR est sur paserelle 4, l'empeche de rentrer à moitié dans le mur
+    if(binPeutBouger==true){
         objLodeRunner.posX = fltXTemporaire;
-    }   
-}
+        objLodeRunner.intNbDeplacementH=objLodeRunner.intNbDeplacementH+1;
+    }
+//}
 }
 
 function trouerPasserelle(){

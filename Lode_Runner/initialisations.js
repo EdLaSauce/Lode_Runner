@@ -75,6 +75,8 @@ function initObjLodeRunner(){
     objLodeRunner.etat = 0;
     objLodeRunner.intDirection = 0;
     objLodeRunner.imageDroiteGauche = 0;
+    objLodeRunner.intNbDeplacementH=0;
+    objLodeRunner.intNbDeplacementV=0;
 }
 
 function initObjTabGardes(){

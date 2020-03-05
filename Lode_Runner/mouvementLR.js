@@ -17,7 +17,7 @@ function gererClavier() {
             objLodeRunner.intDirection = -1;
             gaucheDroite();
            }else{
-               console.log("Impossible de bouger gauche droite");
+            gaucheDroiteEchelle();
            }
             
         break;
@@ -27,7 +27,7 @@ function gererClavier() {
             objLodeRunner.intDirection = 1;
             gaucheDroite();
            }else{
-            console.log("Impossible de bouger gauche droite");
+            gaucheDroiteEchelle();
            }
         break;
 
@@ -108,8 +108,35 @@ function hautBas(){
     }
 }
 
-function gaucheDroite(){
+function gaucheDroiteEchelle(){
+    let fltYTemporaire = objLodeRunner.posY + (objLodeRunner.vitesse * objLodeRunner.intDirection);
+    const numCelluleX = Math.round((objLodeRunner.posX-50)/30);
+    const numCelluleY = Math.ceil((fltYTemporaire-50)/30);
+
+    console.log('X :' + numCelluleX + ' Y : ' + numCelluleY)
+
+   /* if (objLodeRunner.intDirection == -1){
+        if(objNiveau.tableau[numCelluleY+1][numCelluleX-1] == '='){
+            objLodeRunner.posY = numCelluleY * 30 +50;
+            objLodeRunner.posX =numCelluleX* 30 + 50;
+            objLodeRunner.etat=0;
+        }
+    }else if (objLodeRunner.intDirection == 1){
+        if(objNiveau.tableau[numCelluleY+1][numCelluleX+1] == '='){
+            objLodeRunner.posX =numCelluleX* 30 + 50;
+            objLodeRunner.etat=0;
+        } else if (objNiveau.tableau[numCelluleY+1][numCelluleX+1] == ' '){
+            objLodeRunner.posX =numCelluleX* 30 + 50;
+            objLodeRunner.etat=2;
+        }
+    }*/
     
+
+}
+
+function gaucheDroite(){
+    if (objLodeRunner.etat != 2 ){
+     
     let fltXTemporaire = objLodeRunner.posX + (objLodeRunner.vitesse * objLodeRunner.intDirection);
     let binPeutBouger = true;
     //Vérifications
@@ -161,7 +188,8 @@ function gaucheDroite(){
 
     if(binPeutBouger){
         objLodeRunner.posX = fltXTemporaire;
-    }
+    }   
+}
 }
 
 function trouerPasserelle(){
@@ -201,10 +229,6 @@ function trouerPasserelle(){
     }
 }
 
-// peut-être à déplacer lorsque cette fonction fonctionnera ?
-//changer de nom ? (il est appelé dans trouerPasserelle )
-//sert à dessiner un jet lorsque LR essaie de trouer une passerelle
-//le dessin ne marche pas pour le moment (mais entre dans la fonction)
 function mettreAJourTrous(){
     //ICI on doit ajouter 1 au compteur des trous chaque seconde
     if(tabTrous.length > 0){
@@ -229,8 +253,8 @@ function chuter(){
     const numCelluleX = Math.round((objLodeRunner.posX-50)/30);
     const numCelluleY = Math.ceil((fltYTemporaire-50)/30);
 
-    if(objNiveau.tableau[numCelluleY][numCelluleX] == ' '||
-            objNiveau.tableau[numCelluleY][numCelluleX] == '_'||
+    if(objNiveau.tableau[numCelluleY][numCelluleX] == ' ' ||
+            objNiveau.tableau[numCelluleY][numCelluleX] == '_' ||
             objNiveau.tableau[numCelluleY][numCelluleX] == 'T'){
         objLodeRunner.posY = fltYTemporaire;
         //play son de la chute

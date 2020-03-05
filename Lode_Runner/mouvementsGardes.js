@@ -112,6 +112,8 @@ function bougerVersLodeRunner(objGarde){
                 }
             }
 
+
+            // penser à ajouter la condition != '=' pour ne pas traverser les murs
             if(objGarde.etat != 2 && objGarde.etat != 1){
                 objGarde.posX = objGarde.posX + (objGarde.vitesse * objGarde.intDirection);
             }

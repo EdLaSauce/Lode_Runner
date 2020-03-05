@@ -70,7 +70,7 @@ function initObjLodeRunner(){
     objLodeRunner.posX = cellulesX/2 * largeurCellule+50;
     objLodeRunner.posY = 14*hauteurCellule +50;
     objLodeRunner.nbVies = 5;
-    objLodeRunner.vitesse = largeurCellule/6;
+    objLodeRunner.vitesse = largeurCellule/4;
     objLodeRunner.strCouleur = 'cornflowerblue';
     objLodeRunner.etat = 0;
     objLodeRunner.intDirection = 0;

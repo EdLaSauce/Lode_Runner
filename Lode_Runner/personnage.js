@@ -73,6 +73,11 @@ function dessinerGarde(objGarde) {
 
     objC2D.translate(objGarde.posX, objGarde.posY);
 
+    if(objGarde.intDirection == -1){
+        objC2D.scale(-1,1);
+        objC2D.translate(-30,0);
+    }
+
     objC2D.beginPath();
     objC2D.arc(15, 6, 5, 0, 2 * Math.PI);
     objC2D.fill();

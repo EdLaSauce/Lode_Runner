@@ -225,7 +225,7 @@ function mettreAJourTrous(){
 }
 
 function chuter(){
-    let fltYTemporaire = objLodeRunner.posY + 1;
+    let fltYTemporaire = objLodeRunner.posY + 2;
     const numCelluleX = Math.round((objLodeRunner.posX-50)/30);
     const numCelluleY = Math.ceil((fltYTemporaire-50)/30);
 

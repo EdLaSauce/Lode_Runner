@@ -80,18 +80,29 @@ function initObjLodeRunner(){
 function initObjTabGardes(){
     tabObjGardes = new Array();
 
-    let nbGardes = objNiveau.numero +2;
+    //let nbGardes = objNiveau.numero +2;
+    
+    /* A fin de tests uniquement */
+    let nbGardes = 1;
+    /* */
+
     let objGarde = null;
     // let tabCouleur = [];
     for(let i=0;i<nbGardes;i++){
         objGarde = new Object();
         objGarde.posX;
         objGarde.posY;
+        /* A des fins de tests uniquement
        assignerPosition(objGarde);
+       */
+        objGarde.posX = 12 * 30 +50;
+        objGarde.posY = 30+50;
+       /* */
         objGarde.binLingot = false;
         objGarde.etat = 0;
         objGarde.strCouleur = 'red'; // Couleur différente pour chaque garde ?
-        objGarde.vitesse = largeurCellule/6;
+        objGarde.vitesse = largeurCellule/15;
+        objGarde.intDirection = 1;
 
         tabObjGardes.push(objGarde);
     }

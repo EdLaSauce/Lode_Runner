@@ -107,6 +107,9 @@ function hautBas(){
     if(binNiveauReussi){
         niveauReussi();
     }
+
+
+    objLodeRunner.intNbDeplacementV=objLodeRunner.intNbDeplacementV+1;
 }
 
 function gaucheDroiteEchelle(){

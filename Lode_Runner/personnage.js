@@ -164,7 +164,8 @@ function dessinerLodeRunnerHorizontal(){
         objC2D.restore();
 
         objC2D.restore();
-    }else {
+    }else if (objLodeRunner.etat==5){
+        //TODO : arranger le dessin quand il tombe
          //bras gauche
          objC2D.save();
          objC2D.rotate(2 * Math.PI / 16);

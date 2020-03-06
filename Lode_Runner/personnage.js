@@ -27,7 +27,8 @@ function dessinerLodeRunner() {
 
     dessinerLodeRunnerHorizontal();
     dessinerLodeRunnerVertical();
-
+    
+    objC2D.restore();
 }
 
 function dessinerLodeRunnerHorizontal() {

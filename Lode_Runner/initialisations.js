@@ -103,7 +103,7 @@ function initObjTabGardes(){
         objGarde.binLingot = false;
         objGarde.etat = 0;
         objGarde.strCouleur = 'red'; // Couleur différente pour chaque garde ?
-        objGarde.vitesse = largeurCellule/15;
+        objGarde.vitesse = largeurCellule/20;
         objGarde.intDirection = 1;
 
         tabObjGardes.push(objGarde);

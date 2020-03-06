@@ -180,3 +180,28 @@ function niveauReussi(){
     //Re init les gardes
     initObjTabGardes();
 }
+
+function mortLodeRunner(){
+    if(objLodeRunner.etat == 4){
+        console.log("LodeRunner n'est plus");
+        objSons.perdVie.play();
+        objPointage.binEnMarche = false;
+        //moins 1 vie
+        const nbVies = objLodeRunner.nbVies -1;
+        const niveau = objNiveau.numero;
+        if(nbVies != 0){
+            //Restart le niveau
+            initObjNiveau();
+            objNiveau.numero = niveau;
+            initTabTrous();
+            initObjLodeRunner();
+            objLodeRunner.nbVies = nbVies;
+
+            initObjTabGardes();
+        }
+        else{
+            //GameOver
+            objSons.gameOver.play();
+        }
+    }
+}

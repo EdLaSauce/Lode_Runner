@@ -261,7 +261,8 @@ function chuter(){
 
     if(objNiveau.tableau[numCelluleY][numCelluleX] == ' ' ||
             objNiveau.tableau[numCelluleY][numCelluleX] == '_' ||
-            objNiveau.tableau[numCelluleY][numCelluleX] == 'T'){
+            objNiveau.tableau[numCelluleY][numCelluleX] == 'T'||
+            objNiveau.tableau[numCelluleY][numCelluleX]=='*'){
         objLodeRunner.posY = fltYTemporaire;
         //play son de la chute
         if(objSons.chute.paused){
@@ -296,22 +297,5 @@ function mettreAJourPositionLR() {
         }
     }
 
-    if(objLodeRunner.etat == 4){
-        console.log("LodeRunner n'est plus");
-        objSons.perdVie.play();
-        //moins 1 vie
-        const nbVies = objLodeRunner.nbVies -1;
-        if(nbVies != 0){
-            //Restart le niveau
-            initObjLodeRunner();
-            objLodeRunner.nbVies = nbVies;
-        }
-        else{
-            //GameOver
-            objPointage.binEnMarche = false;
-            objSons.gameOver.play();
-        }
-        
-        
-    }
+    
 }

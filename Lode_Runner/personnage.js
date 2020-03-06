@@ -164,6 +164,46 @@ function dessinerLodeRunnerHorizontal(){
         objC2D.restore();
 
         objC2D.restore();
+    }else {
+         //bras gauche
+         objC2D.save();
+         objC2D.rotate(2 * Math.PI / 16);
+         objC2D.fillRect(12, 6, 5.5, 3.3);
+         objC2D.restore();
+         objC2D.save();
+         objC2D.rotate(-1 * Math.PI / 8);
+         objC2D.fillRect(-1, 13, 5, 3.3);
+ 
+         objC2D.restore();
+ 
+         //bras droit
+         objC2D.save();
+         objC2D.rotate(-2 * Math.PI / 16);
+         objC2D.fillRect(10, 18, 5.5, 3.3);
+         objC2D.restore();
+         objC2D.save();
+         objC2D.rotate(-2 * Math.PI / 8);
+         objC2D.fillRect(5, 22, 5, 3.3);
+         objC2D.restore();
+ 
+         objC2D.fillStyle = '#a09794';
+         //jambe gauche
+         objC2D.save();
+         objC2D.rotate(3.5 * Math.PI / 16);
+         objC2D.fillRect(22, 7, 3.5, 7);
+         objC2D.rotate(7 * Math.PI / 16);
+         objC2D.fillRect(16, -22, 3.5, 7);
+         objC2D.restore();
+ 
+         //jambe droite
+         objC2D.save();
+         objC2D.rotate(-7 * Math.PI / 16);
+         objC2D.fillRect(-20, 18, 3.5, 7);
+         objC2D.rotate(-7 * Math.PI / 16);
+         objC2D.fillRect(-30, -20, 3.5, 8);
+         objC2D.restore();
+ 
+         objC2D.restore();
     }
 }
 

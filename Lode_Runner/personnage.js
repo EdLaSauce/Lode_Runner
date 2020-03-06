@@ -27,12 +27,12 @@ function dessinerLodeRunner() {
 
     dessinerLodeRunnerHorizontal();
     dessinerLodeRunnerVertical();
-   
+
 }
 
-function dessinerLodeRunnerHorizontal(){
-    
-    if (objLodeRunner.intNbDeplacementH % 2 != 0 &&  objLodeRunner.etat == 0) {
+function dessinerLodeRunnerHorizontal() {
+    //État 0 :marche 
+    if (objLodeRunner.intNbDeplacementH % 2 != 0 && objLodeRunner.etat == 0) {
         //bras gauche
         objC2D.save();
         objC2D.rotate(2 * Math.PI / 16);
@@ -72,9 +72,8 @@ function dessinerLodeRunnerHorizontal(){
         objC2D.restore();
 
         objC2D.restore();
-
-    } else if (objLodeRunner.intNbDeplacementH % 2 == 0 &&  objLodeRunner.etat == 0) {
-
+        //état 0: marche 
+    } else if (objLodeRunner.intNbDeplacementH % 2 == 0 && objLodeRunner.etat == 0) {
         //bras gauche
         objC2D.save();
         objC2D.rotate(6 * Math.PI / 16);
@@ -115,30 +114,41 @@ function dessinerLodeRunnerHorizontal(){
         objC2D.restore();
 
         objC2D.restore();
-    }else if (objLodeRunner.etat==3){
-       //TODO : modifier dessin jambes quand il est sur barre de franchissement
-
+    } else if (objLodeRunner.etat == 3) {
+        //état 3: barre de franchissement
         objC2D.fillStyle = '#a09794';
 
-        //jambe droite
-        objC2D.save();
-        objC2D.rotate(-2 * Math.PI / 16);
-        objC2D.fillRect(5, 26, 3.5, 5);
-        objC2D.rotate(3 * Math.PI / 16);
-        objC2D.fillRect(21, 22, 3.5, 5);
-        objC2D.restore();
+        if (objLodeRunner.intNbDeplacementH % 2 == 0) {
+            objC2D.save();
+            objC2D.rotate(-2 * Math.PI / 16);
+            objC2D.fillRect(5, 25, 3.5, 6);
+            objC2D.rotate(3 * Math.PI / 16);
+            objC2D.fillRect(22, 21, 3.5, 5);
+            objC2D.restore();
 
-        //jambe gauche
-        objC2D.save();
-        objC2D.rotate(2 * Math.PI / 16);
-        objC2D.fillRect(20, 13, 3.5, 7);
-        objC2D.rotate(2 * Math.PI / 16);
-        objC2D.fillRect(26, 10, 3.5, 5);
-        objC2D.restore();
-        
-        if (objLodeRunner.intNbDeplacementH % 2 ==0){
             objC2D.scale(-1, 1);
             objC2D.translate(-30, 0);
+
+            objC2D.save();
+            objC2D.rotate(-2 * Math.PI / 16);
+            objC2D.fillRect(5, 25, 3.5, 5);
+            objC2D.rotate(3 * Math.PI / 16);
+            objC2D.fillRect(21, 20, 3.5, 5);
+            objC2D.restore();
+        } else {
+            objC2D.save();
+            objC2D.rotate(-2 * Math.PI / 16);
+            objC2D.fillRect(5, 26, 3.5, 5);
+            objC2D.rotate(3 * Math.PI / 16);
+            objC2D.fillRect(21, 22, 3.5, 5);
+            objC2D.restore();
+
+            objC2D.save();
+            objC2D.rotate(2 * Math.PI / 16);
+            objC2D.fillRect(20, 13, 3.5, 7);
+            objC2D.rotate(2 * Math.PI / 16);
+            objC2D.fillRect(26, 10, 3.5, 5);
+            objC2D.restore();
         }
 
         objC2D.fillStyle = objLodeRunner.strCouleur;
@@ -164,144 +174,100 @@ function dessinerLodeRunnerHorizontal(){
         objC2D.restore();
 
         objC2D.restore();
-    }else if (objLodeRunner.etat==5){
-        //TODO : arranger le dessin quand il tombe
-         //bras gauche
-         objC2D.save();
-         objC2D.rotate(2 * Math.PI / 16);
-         objC2D.fillRect(12, 6, 5.5, 3.3);
-         objC2D.restore();
-         objC2D.save();
-         objC2D.rotate(-1 * Math.PI / 8);
-         objC2D.fillRect(-1, 13, 5, 3.3);
- 
-         objC2D.restore();
- 
-         //bras droit
-         objC2D.save();
-         objC2D.rotate(-2 * Math.PI / 16);
-         objC2D.fillRect(10, 18, 5.5, 3.3);
-         objC2D.restore();
-         objC2D.save();
-         objC2D.rotate(-2 * Math.PI / 8);
-         objC2D.fillRect(5, 22, 5, 3.3);
-         objC2D.restore();
- 
-         objC2D.fillStyle = '#a09794';
-         //jambe gauche
-         objC2D.save();
-         objC2D.rotate(3.5 * Math.PI / 16);
-         objC2D.fillRect(22, 7, 3.5, 7);
-         objC2D.rotate(7 * Math.PI / 16);
-         objC2D.fillRect(16, -22, 3.5, 7);
-         objC2D.restore();
- 
-         //jambe droite
-         objC2D.save();
-         objC2D.rotate(-7 * Math.PI / 16);
-         objC2D.fillRect(-20, 18, 3.5, 7);
-         objC2D.rotate(-7 * Math.PI / 16);
-         objC2D.fillRect(-30, -20, 3.5, 8);
-         objC2D.restore();
- 
-         objC2D.restore();
+    } else if (objLodeRunner.etat == 5) {
+        //état 5: creuser un trou
+        //bras gauche
+        objC2D.save();
+        objC2D.rotate(5 * Math.PI / 16);
+        objC2D.fillRect(17, -4, 5.5, 3.3);
+        objC2D.restore();
+        objC2D.save();
+        objC2D.rotate(-1.5 * Math.PI / 8);
+        objC2D.fillRect(-1, 17, 5, 3.3);
+
+        objC2D.restore();
+
+        //bras droit
+        objC2D.save();
+        objC2D.rotate(3.5 * Math.PI / 16);
+        objC2D.fillRect(21, -1, 5.5, 3.3);
+        objC2D.restore();
+        objC2D.save();
+        objC2D.rotate(-4 * Math.PI / 8);
+        objC2D.fillRect(-19, 20, 5, 3.3);
+        objC2D.restore();
+
+        objC2D.fillStyle = '#a09794';
+
+        //jambe droite
+        objC2D.save();
+        objC2D.rotate(-2 * Math.PI / 16);
+        objC2D.fillRect(5, 26, 3.5, 5);
+        objC2D.rotate(3 * Math.PI / 16);
+        objC2D.fillRect(21, 21, 3.5, 5);
+        objC2D.restore();
+
+        //jambe gauche
+        objC2D.save();
+        objC2D.rotate(2 * Math.PI / 16);
+        objC2D.fillRect(20, 13, 3.5, 7);
+        objC2D.rotate(2 * Math.PI / 16);
+        objC2D.fillRect(26, 10, 3.5, 5);
+        objC2D.restore();
+
+        objC2D.restore();
     }
 }
 
-function dessinerLodeRunnerVertical(){
-    if (objLodeRunner.etat == 1){
-        
-    if (objLodeRunner.intNbDeplacementV % 2 == 0 ) {
-        objC2D.scale(-1, 1);
-        objC2D.translate(-30, 0);
-    }
-     //bras gauche
-     objC2D.save();
-     objC2D.rotate(7 * Math.PI / 16);
-     objC2D.fillRect(14, -7, 5.5, 3.3);
-     objC2D.restore();
-     objC2D.save();
-     objC2D.rotate(-2 * Math.PI / 8);
-     objC2D.fillRect(-5, 17, 5, 3.3);
+function dessinerLodeRunnerVertical() {
+    if (objLodeRunner.etat == 1 || objLodeRunner.etat == 2) {
+        //état 2 : chuter
+        //état 1: monter/descendre et sortir du trou
 
-     objC2D.restore();
-
-     //bras gauche
-     objC2D.save();
-     objC2D.rotate(-4 * Math.PI / 16);
-     objC2D.fillRect(2,21, 5,3.3);
-     objC2D.restore();
-     objC2D.save();
-     objC2D.rotate(-2.5 * Math.PI / 8);
-     objC2D.fillRect(2, 22, 5, 3.3);
-     objC2D.restore();
-
-     objC2D.fillStyle = '#a09794';
-
-     //jambe gauche
-     objC2D.save();
-     objC2D.rotate(1.5 * Math.PI / 16);
-     objC2D.fillRect(25, 10, 3.5, 7);
-     objC2D.rotate(2 * Math.PI / 16);
-     objC2D.fillRect(26, 0, 3.5, 8);
-     objC2D.restore();
-
-     //jambe droite
-     objC2D.save();
-     objC2D.rotate(1 * Math.PI / 16);
-     objC2D.fillRect(17, 22, 3.5, 7);
-     objC2D.rotate(2 * Math.PI / 16);
-     objC2D.fillRect(24, 9, 4, 5);
-     objC2D.restore();
-
-     objC2D.restore();
-    } else if (objLodeRunner.etat == 2){
-
-    //TODO : modifier dessin quand il tombe     
-        if (objLodeRunner.intNbDeplacementV % 2 == 0 ) {
+        if (objLodeRunner.intNbDeplacementV % 2 == 0) {
             objC2D.scale(-1, 1);
             objC2D.translate(-30, 0);
         }
-         //bras gauche
-         objC2D.save();
-         objC2D.rotate(7 * Math.PI / 16);
-         objC2D.fillRect(14, -7, 5.5, 3.3);
-         objC2D.restore();
-         objC2D.save();
-         objC2D.rotate(-2 * Math.PI / 8);
-         objC2D.fillRect(-5, 17, 5, 3.3);
-    
-         objC2D.restore();
-    
-         //bras gauche
-         objC2D.save();
-         objC2D.rotate(-4 * Math.PI / 16);
-         objC2D.fillRect(2,21, 5,3.3);
-         objC2D.restore();
-         objC2D.save();
-         objC2D.rotate(-2.5 * Math.PI / 8);
-         objC2D.fillRect(2, 22, 5, 3.3);
-         objC2D.restore();
-    
-         objC2D.fillStyle = '#a09794';
-    
-         //jambe gauche
-         objC2D.save();
-         objC2D.rotate(1.5 * Math.PI / 16);
-         objC2D.fillRect(25, 10, 3.5, 7);
-         objC2D.rotate(2 * Math.PI / 16);
-         objC2D.fillRect(26, 0, 3.5, 8);
-         objC2D.restore();
-    
-         //jambe droite
-         objC2D.save();
-         objC2D.rotate(1 * Math.PI / 16);
-         objC2D.fillRect(17, 22, 3.5, 7);
-         objC2D.rotate(2 * Math.PI / 16);
-         objC2D.fillRect(24, 9, 4, 5);
-         objC2D.restore();
-    
-         objC2D.restore();
+        //bras gauche
+        objC2D.save();
+        objC2D.rotate(7 * Math.PI / 16);
+        objC2D.fillRect(14, -7, 5.5, 3.3);
+        objC2D.restore();
+        objC2D.save();
+        objC2D.rotate(-2 * Math.PI / 8);
+        objC2D.fillRect(-5, 17, 5, 3.3);
+
+        objC2D.restore();
+
+        //bras gauche
+        objC2D.save();
+        objC2D.rotate(-4 * Math.PI / 16);
+        objC2D.fillRect(2, 21, 5, 3.3);
+        objC2D.restore();
+        objC2D.save();
+        objC2D.rotate(-2.5 * Math.PI / 8);
+        objC2D.fillRect(2, 22, 5, 3.3);
+        objC2D.restore();
+
+        objC2D.fillStyle = '#a09794';
+
+        //jambe gauche
+        objC2D.save();
+        objC2D.rotate(1.5 * Math.PI / 16);
+        objC2D.fillRect(25, 10, 3.5, 7);
+        objC2D.rotate(2 * Math.PI / 16);
+        objC2D.fillRect(26, 0, 3.5, 8);
+        objC2D.restore();
+
+        //jambe droite
+        objC2D.save();
+        objC2D.rotate(1 * Math.PI / 16);
+        objC2D.fillRect(17, 22, 3.5, 7);
+        objC2D.rotate(2 * Math.PI / 16);
+        objC2D.fillRect(24, 9, 4, 5);
+        objC2D.restore();
+
+        objC2D.restore();
     }
 }
 

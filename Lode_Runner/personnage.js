@@ -273,6 +273,8 @@ function dessinerLodeRunnerVertical() {
 }
 
 function dessinerGarde(objGarde) {
+
+    console.log(objGarde.intNbDeplacementV);
     objC2D.save();
 
     objC2D.fillStyle = '#a09794';

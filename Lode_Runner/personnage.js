@@ -286,7 +286,11 @@ function dessinerGarde(objGarde) {
     objC2D.arc(15, 6, 5, 0, 2 * Math.PI);
     objC2D.fill();
 
-    objC2D.fillStyle = objGarde.strCouleur;
+    if(objGarde.binLingot){
+        objC2D.fillStyle = 'GoldenRod';
+    }else{
+        objC2D.fillStyle = objGarde.strCouleur;
+    }
 
     //milieu du corps
     objC2D.fillRect(13, 11, 4.5, 10);
@@ -297,8 +301,7 @@ function dessinerGarde(objGarde) {
 
 function dessinerGardeHorizontale(objGarde){
   //État 0 :marche 
-    console.log(objGarde.intNbDeplacementH)
-  if (objGarde.intNbDeplacementH % 10 != 0 && objGarde.etat == 0) {
+  if (objGarde.intNbDeplacementH % 15 < 7 && objGarde.etat == 0) {
          //bras gauche
          objC2D.save();
          objC2D.rotate(6 * Math.PI / 16);
@@ -340,107 +343,111 @@ function dessinerGardeHorizontale(objGarde){
  
          objC2D.restore();
 
-}else if (objGarde.intNbDeplacementH % 10 == 0 && objGarde.etat == 0) {
-    //bras gauche
-    objC2D.save();
-    objC2D.rotate(2 * Math.PI / 16);
-    objC2D.fillRect(12, 6, 5.5, 3.3);
-    objC2D.restore();
-    objC2D.save();
-    objC2D.rotate(-1 * Math.PI / 8);
-    objC2D.fillRect(-1, 13, 5, 3.3);
-
-    objC2D.restore();
-
-    //bras droit
-    objC2D.save();
-    objC2D.rotate(-2 * Math.PI / 16);
-    objC2D.fillRect(10, 18, 5.5, 3.3);
-    objC2D.restore();
-    objC2D.save();
-    objC2D.rotate(-2 * Math.PI / 8);
-    objC2D.fillRect(5, 22, 5, 3.3);
-    objC2D.restore();
-
-    objC2D.fillStyle = '#a09794';
-    //jambe gauche
-    objC2D.save();
-    objC2D.rotate(3.5 * Math.PI / 16);
-    objC2D.fillRect(22, 7, 3.5, 7);
-    objC2D.rotate(7 * Math.PI / 16);
-    objC2D.fillRect(16, -22, 3.5, 7);
-    objC2D.restore();
-
-    //jambe droite
-    objC2D.save();
-    objC2D.rotate(-7 * Math.PI / 16);
-    objC2D.fillRect(-20, 18, 3.5, 7);
-    objC2D.rotate(-7 * Math.PI / 16);
-    objC2D.fillRect(-30, -20, 3.5, 8);
-    objC2D.restore();
-
-    objC2D.restore();
-}else if (objGarde.etat == 3) {
-    //état 3: barre de franchissement
-    objC2D.fillStyle = '#a09794';
-
-    if (objGarde.intNbDeplacementH % 10 == 0) {
-        objC2D.save();
-        objC2D.rotate(-2 * Math.PI / 16);
-        objC2D.fillRect(5, 25, 3.5, 6);
-        objC2D.rotate(3 * Math.PI / 16);
-        objC2D.fillRect(22, 21, 3.5, 5);
-        objC2D.restore();
-
-        objC2D.scale(-1, 1);
-        objC2D.translate(-30, 0);
-
-        objC2D.save();
-        objC2D.rotate(-2 * Math.PI / 16);
-        objC2D.fillRect(5, 25, 3.5, 5);
-        objC2D.rotate(3 * Math.PI / 16);
-        objC2D.fillRect(21, 20, 3.5, 5);
-        objC2D.restore();
-    } else {
-        objC2D.save();
-        objC2D.rotate(-2 * Math.PI / 16);
-        objC2D.fillRect(5, 26, 3.5, 5);
-        objC2D.rotate(3 * Math.PI / 16);
-        objC2D.fillRect(21, 22, 3.5, 5);
-        objC2D.restore();
-
+    }else if (objGarde.intNbDeplacementH % 15 >= 7 && objGarde.etat == 0) {
+        //bras gauche
         objC2D.save();
         objC2D.rotate(2 * Math.PI / 16);
-        objC2D.fillRect(20, 13, 3.5, 7);
-        objC2D.rotate(2 * Math.PI / 16);
-        objC2D.fillRect(26, 10, 3.5, 5);
+        objC2D.fillRect(12, 6, 5.5, 3.3);
         objC2D.restore();
-    }
+        objC2D.save();
+        objC2D.rotate(-1 * Math.PI / 8);
+        objC2D.fillRect(-1, 13, 5, 3.3);
 
-    objC2D.fillStyle = objGarde.strCouleur;
-    //bras gauche
-    objC2D.save();
-    objC2D.rotate(6 * Math.PI / 16);
-    objC2D.fillRect(17, -4, 5.5, 3.3);
-    objC2D.restore();
-    objC2D.save();
-    objC2D.rotate(-1.5 * Math.PI / 8);
-    objC2D.fillRect(-1, 17, 5, 3.3);
+        objC2D.restore();
 
-    objC2D.restore();
+        //bras droit
+        objC2D.save();
+        objC2D.rotate(-2 * Math.PI / 16);
+        objC2D.fillRect(10, 18, 5.5, 3.3);
+        objC2D.restore();
+        objC2D.save();
+        objC2D.rotate(-2 * Math.PI / 8);
+        objC2D.fillRect(5, 22, 5, 3.3);
+        objC2D.restore();
 
-    //bras droit
-    objC2D.save();
-    objC2D.rotate(-2 * Math.PI / 16);
-    objC2D.fillRect(10, 18, 5.5, 3.3);
-    objC2D.restore();
-    objC2D.save();
-    objC2D.rotate(-2 * Math.PI / 8);
-    objC2D.fillRect(5, 22, 5, 3.3);
-    objC2D.restore();
+        objC2D.fillStyle = '#a09794';
+        //jambe gauche
+        objC2D.save();
+        objC2D.rotate(3.5 * Math.PI / 16);
+        objC2D.fillRect(22, 7, 3.5, 7);
+        objC2D.rotate(7 * Math.PI / 16);
+        objC2D.fillRect(16, -22, 3.5, 7);
+        objC2D.restore();
 
-    objC2D.restore();
-} 
+        //jambe droite
+        objC2D.save();
+        objC2D.rotate(-7 * Math.PI / 16);
+        objC2D.fillRect(-20, 18, 3.5, 7);
+        objC2D.rotate(-7 * Math.PI / 16);
+        objC2D.fillRect(-30, -20, 3.5, 8);
+        objC2D.restore();
+
+        objC2D.restore();
+    }else if (objGarde.etat == 3) {
+        //état 3: barre de franchissement
+        objC2D.fillStyle = '#a09794';
+
+        if (objGarde.intNbDeplacementH % 15 < 7) {
+            objC2D.save();
+            objC2D.rotate(-2 * Math.PI / 16);
+            objC2D.fillRect(5, 25, 3.5, 6);
+            objC2D.rotate(3 * Math.PI / 16);
+            objC2D.fillRect(22, 21, 3.5, 5);
+            objC2D.restore();
+
+            objC2D.scale(-1, 1);
+            objC2D.translate(-30, 0);
+
+            objC2D.save();
+            objC2D.rotate(-2 * Math.PI / 16);
+            objC2D.fillRect(5, 25, 3.5, 5);
+            objC2D.rotate(3 * Math.PI / 16);
+            objC2D.fillRect(21, 20, 3.5, 5);
+            objC2D.restore();
+        } else {
+            objC2D.save();
+            objC2D.rotate(-2 * Math.PI / 16);
+            objC2D.fillRect(5, 26, 3.5, 5);
+            objC2D.rotate(3 * Math.PI / 16);
+            objC2D.fillRect(21, 22, 3.5, 5);
+            objC2D.restore();
+
+            objC2D.save();
+            objC2D.rotate(2 * Math.PI / 16);
+            objC2D.fillRect(20, 13, 3.5, 7);
+            objC2D.rotate(2 * Math.PI / 16);
+            objC2D.fillRect(26, 10, 3.5, 5);
+            objC2D.restore();
+        }
+        if(objGarde.binLingot){
+            objC2D.fillStyle = 'GoldenRod';
+        }else{
+            objC2D.fillStyle = objGarde.strCouleur;
+        }
+       
+        //bras gauche
+        objC2D.save();
+        objC2D.rotate(6 * Math.PI / 16);
+        objC2D.fillRect(17, -4, 5.5, 3.3);
+        objC2D.restore();
+        objC2D.save();
+        objC2D.rotate(-1.5 * Math.PI / 8);
+        objC2D.fillRect(-1, 17, 5, 3.3);
+
+        objC2D.restore();
+
+        //bras droit
+        objC2D.save();
+        objC2D.rotate(-2 * Math.PI / 16);
+        objC2D.fillRect(10, 18, 5.5, 3.3);
+        objC2D.restore();
+        objC2D.save();
+        objC2D.rotate(-2 * Math.PI / 8);
+        objC2D.fillRect(5, 22, 5, 3.3);
+        objC2D.restore();
+
+        objC2D.restore();
+    } 
 }
 
 function dessinerGardeVertical(objGarde){
@@ -448,7 +455,7 @@ function dessinerGardeVertical(objGarde){
         //état 2 : chuter
         //état 1: monter/descendre et sortir du trou
 
-        if ( objGarde.intNbDeplacementV % 10 == 0) {
+        if ( objGarde.intNbDeplacementV % 15 < 7) {
             objC2D.scale(-1, 1);
             objC2D.translate(-30, 0);
         }

@@ -9,95 +9,95 @@ const hauteurCellule = 30;
     ATTENTION! Le niveau doit être dessiné à partir des coordonnées (50,50)
 */
 
-function dessinerFond(){
+function dessinerFond() {
     objC2D.save();
     objC2D.fillStyle = 'black';
-    objC2D.fillRect(0, 0, largeurCellule*cellulesX, hauteurCellule*cellulesY);
+    objC2D.fillRect(0, 0, largeurCellule * cellulesX, hauteurCellule * cellulesY);
     objC2D.restore();
 }
 
-function dessinerBrique(){
+function dessinerBrique() {
     objC2D.save();
     objC2D.fillStyle = '#768283';
 
     objC2D.beginPath();
-    objC2D.fillRect(0,0,largeurCellule,hauteurCellule);
+    objC2D.fillRect(0, 0, largeurCellule, hauteurCellule);
 
     objC2D.fillStyle = '#c61717';
     objC2D.beginPath();
-    objC2D.fillRect(0,2,20,10);
-    objC2D.fillRect(22,2,8,10);
-    objC2D.fillRect(0,18,10,10);
-    objC2D.fillRect(12,18,18,10)
+    objC2D.fillRect(0, 2, 20, 10);
+    objC2D.fillRect(22, 2, 8, 10);
+    objC2D.fillRect(0, 18, 10, 10);
+    objC2D.fillRect(12, 18, 18, 10)
 
     objC2D.restore();
 }
 
-function dessinerEchelle(){
+function dessinerEchelle() {
     objC2D.save();
-    objC2D.fillStyle= '#336600';
+    objC2D.fillStyle = '#336600';
 
     objC2D.beginPath();
-    objC2D.fillRect(0,0,5,30);
-    objC2D.fillRect(25,0,5,30);
-    objC2D.fillRect(0,5,30,3);
-    objC2D.fillRect(0,15,30,3);
-    objC2D.fillRect(0,25,30,3);
+    objC2D.fillRect(0, 0, 5, 30);
+    objC2D.fillRect(25, 0, 5, 30);
+    objC2D.fillRect(0, 5, 30, 3);
+    objC2D.fillRect(0, 15, 30, 3);
+    objC2D.fillRect(0, 25, 30, 3);
 
     objC2D.restore();
 }
 
-function dessinerLingot(){
+function dessinerLingot() {
     objC2D.save();
 
-    let objDegrade=objC2D.createLinearGradient(5,16,25,30);
+    let objDegrade = objC2D.createLinearGradient(5, 16, 25, 30);
 
-    objDegrade.addColorStop(0,'#F7BC35');
-    objDegrade.addColorStop(0.5,'#E1DEDD');
-    objDegrade.addColorStop(1,'#F7BC35');
+    objDegrade.addColorStop(0, '#F7BC35');
+    objDegrade.addColorStop(0.5, '#E1DEDD');
+    objDegrade.addColorStop(1, '#F7BC35');
 
-    objC2D.fillStyle=objDegrade;
+    objC2D.fillStyle = objDegrade;
     objC2D.beginPath();
-    objC2D.fillRect(5,16,20,14);
+    objC2D.fillRect(5, 16, 20, 14);
 
     objC2D.restore();
 }
 
-function dessinerBeton(){
+function dessinerBeton() {
     objC2D.save();
 
-    objC2D.fillStyle='#9e9c9c';
+    objC2D.fillStyle = '#9e9c9c';
     objC2D.beginPath();
-    objC2D.fillRect(0,0,30,30);
+    objC2D.fillRect(0, 0, 30, 30);
 
-    objC2D.fillStyle='#CBC9CD';
+    objC2D.fillStyle = '#CBC9CD';
     objC2D.beginPath();
-    objC2D.fillRect(5,5,20,20);
+    objC2D.fillRect(5, 5, 20, 20);
 
     objC2D.restore();
 
 }
 
-function dessinerBarre(){
+function dessinerBarre() {
     objC2D.save();
 
-    objC2D.fillStyle='#a09794';
+    objC2D.fillStyle = '#a09794';
 
     objC2D.beginPath();
-    objC2D.fillRect(0,5,30,3);
+    objC2D.fillRect(0, 5, 30, 3);
 
     objC2D.restore();
 }
 
-function dessinerNiveau(){
+function dessinerNiveau() {
     objC2D.save();
-    objC2D.translate(50,50);
+    objC2D.translate(50, 50);
     dessinerFond();
-    for(let i=0;i<cellulesY;i++){
-        for(let j=0;j<cellulesX;j++){
+    for (let i = 0; i < cellulesY; i++) {
+        for (let j = 0; j < cellulesX; j++) {
             objC2D.save();
-            objC2D.translate(30*j,30*i);
-            switch(objNiveau.tableau[i][j]){
+            objC2D.translate(30 * j, 30 * i);
+            switch (objNiveau.tableau[i][j]) {
                 case '=':
                     dessinerBrique();
                     break;
@@ -120,38 +120,57 @@ function dessinerNiveau(){
             objC2D.restore();
         }
     }
+
     objC2D.restore();
 }
 
-function dessinerTrou(){
+function dessinerTrou() {
     objC2D.save();
     objC2D.fillStyle = 'black';
-    objC2D.fillRect(0,0,30,30);
+    objC2D.fillRect(0, 0, 30, 30);
     objC2D.restore();
 }
 
-function retirerObjet(celluleX,celluleY){
+function dessinerFinPartie() {
+    objC2D.save();
+    objC2D.translate(objCanvas.width/2, objCanvas.height/3);
+    objC2D.fillStyle = 'gray';
+    objC2D.fillRect(-objCanvas.width/8, 0,objCanvas.width/4, objCanvas.height/4);
+
+    objC2D.beginPath();
+    objC2D.arc(0,0,objCanvas.width/8,0,2*Math.PI,false);
+    objC2D.fill();
+
+    objC2D.font="30px Arial";
+    objC2D.fillStyle="red";
+    objC2D.textAlign = "center";
+    objC2D.fillText("R.I.P.", 0,0);
+    objC2D.restore();
+
+}
+
+function retirerObjet(celluleX, celluleY) {
     objNiveau.tableau[celluleY][celluleX] = ' ';
 }
 
-function mettreObjet(celluleX,celluleY,char){
+function mettreObjet(celluleX, celluleY, char) {
     objNiveau.tableau[celluleY][celluleX] = char;
 }
 
-function echelleSecrete(){
-    if(objNiveau.lingots == 0){
-        for(let y = 0;y<cellulesY; y++){
-            for(let x = 0;x<cellulesX;x++){
-                if(objNiveau.tableau[y][x] == '!'){
+function echelleSecrete() {
+    if (objNiveau.lingots == 0) {
+        for (let y = 0; y < cellulesY; y++) {
+            for (let x = 0; x < cellulesX; x++) {
+                if (objNiveau.tableau[y][x] == '!') {
                     objNiveau.tableau[y][x] = '#';
-                    console.log(x+", "+y);
+                    console.log(x + ", " + y);
                 }
             }
         }
     }
 }
 
-function niveauReussi(){
+function niveauReussi() {
     objSons.niveauTermine.play();
     objPointage.binEnMarche = false;
     //Ajouter le score au niveau
@@ -159,10 +178,10 @@ function niveauReussi(){
     //Ajouter le score du niveau au cumul de score
     objPointage.scoreCumul += objNiveau.scoreNiveau;
     //Le numero du prochain niveau
-    const niveauSuivant = objNiveau.numero +1 ;
+    const niveauSuivant = objNiveau.numero + 1;
     //Garder le nombre de vie de lode runner
     const viesRestantes = objLodeRunner.nbVies;
-    
+
     //Re init le niveau
     initObjNiveau();
     objNiveau.numero = niveauSuivant;
@@ -181,16 +200,16 @@ function niveauReussi(){
     initObjTabGardes();
 }
 
-function mortLodeRunner(){
-    if(objLodeRunner.etat == 4){
-        console.log("LodeRunner n'est plus");
+function mortLodeRunner() {
+    if (objLodeRunner.etat == 4) {
         objSons.perdVie.play();
         objPointage.binEnMarche = false;
         //moins 1 vie
-        const nbVies = objLodeRunner.nbVies -1;
+        const nbVies = objLodeRunner.nbVies - 1;
         const niveau = objNiveau.numero;
-        if(nbVies != 0){
+        if (nbVies != 0) {
             //Restart le niveau
+            objPointage.binFinPartie = false;
             initObjNiveau();
             objNiveau.numero = niveau;
             initTabTrous();
@@ -199,10 +218,9 @@ function mortLodeRunner(){
 
             initObjTabGardes();
         }
-        else{
+        else {
             //GameOver
             objSons.gameOver.play();
-            objPointage.binFinPartie=true;
             //Restart le niveau
             initObjNiveau();
             initTabTrous();
@@ -210,6 +228,7 @@ function mortLodeRunner(){
             initObjLodeRunner();
             initObjTabGardes();
             initObjSons();
+            objPointage.binFinPartie = true;
         }
     }
 }

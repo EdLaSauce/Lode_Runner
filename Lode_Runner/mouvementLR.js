@@ -5,62 +5,69 @@
 
 function gererClavier() {
    event.preventDefault();
-    //Appuyer sur une touche pour débuter le jeu
-    //Sans cette instruction, le temps démarre au chargement du niveau
-    if(objPointage.binEnMarche == false){
-        objPointage.binEnMarche = true;
-    }
+    
+   //Empecher de bouger et commencer la partie si GameOver
+    if(!objPointage.binFinPartie){
 
-    switch (event.keyCode) {
-        // gauche
-        case 37:
-           if(objLodeRunner.etat == 0 || objLodeRunner.etat == 3){
-            objLodeRunner.intDirection = -1;
-            gaucheDroite();
-           }else{
-            gaucheDroiteEchelle();
-           }
+        //Appuyer sur une touche pour débuter le jeu
+        //Sans cette instruction, le temps démarre au chargement du niveau
+        if(objPointage.binEnMarche == false){
+            objPointage.binEnMarche = true;
+        }
+    
+        switch (event.keyCode) {
+            // gauche
+            case 37:
+               if(objLodeRunner.etat == 0 || objLodeRunner.etat == 3){
+                objLodeRunner.intDirection = -1;
+                gaucheDroite();
+               }else{
+                gaucheDroiteEchelle();
+               }
+                
+            break;
+            // droite
+            case 39:
+               if(objLodeRunner.etat == 0 || objLodeRunner.etat == 3){
+                objLodeRunner.intDirection = 1;
+                gaucheDroite();
+               }else{
+                gaucheDroiteEchelle();
+               }
+            break;
+    
+            //bas
+            case 40:
+                console.log("down arrow");
+                objLodeRunner.intDirection = 1;
+               hautBas();
+            break;
+    
+            //haut
+            case 38:
+                console.log("up arrow");
+                objLodeRunner.intDirection = -1;
+               hautBas();
+            break;
+    
+            //touche Z
+            case 90:
+               console.log("Trouer à gauche");
+               objLodeRunner.intDirection = -1;
+               trouerPasserelle();
+            break;
             
-        break;
-        // droite
-        case 39:
-           if(objLodeRunner.etat == 0 || objLodeRunner.etat == 3){
-            objLodeRunner.intDirection = 1;
-            gaucheDroite();
-           }else{
-            gaucheDroiteEchelle();
-           }
-        break;
-
-        //bas
-        case 40:
-            console.log("down arrow");
-            objLodeRunner.intDirection = 1;
-           hautBas();
-        break;
-
-        //haut
-        case 38:
-            console.log("up arrow");
-            objLodeRunner.intDirection = -1;
-           hautBas();
-        break;
-
-        //touche Z
-        case 90:
-           console.log("Trouer à gauche");
-           objLodeRunner.intDirection = -1;
-           trouerPasserelle();
-        break;
-        
-        //touche X
-        case 88:
-           console.log("Trouer à droite");
-           objLodeRunner.intDirection = 1;
-           trouerPasserelle();
-        break;
+            //touche X
+            case 88:
+               console.log("Trouer à droite");
+               objLodeRunner.intDirection = 1;
+               trouerPasserelle();
+            break;
+        }
+    }else{
+        //On peut permettre de recommencer le jeu si on appuie sur Enter par exemple,
+        //mais pas nécessaire
     }
-
 }
 
 function hautBas(){
@@ -206,7 +213,7 @@ function trouerPasserelle(){
 
     // Si la requête de trouer est dans les limites du jeu
     if(numCelluleXTrouer >=0 && numCelluleXTrouer < 28){
-        console.log("Cellule a trouer X: "+numCelluleXTrouer+", cellule a trouer Y: "+numCelluleYTrouer);
+        //console.log("Cellule a trouer X: "+numCelluleXTrouer+", cellule a trouer Y: "+numCelluleYTrouer);
         //Et que c'est une passerelle
         if(objNiveau.tableau[numCelluleYTrouer][numCelluleXTrouer] == '='){
             // Et rien ne se trouve au dessus
@@ -258,7 +265,6 @@ function chuter(){
     let fltYTemporaire = objLodeRunner.posY + 2;
     const numCelluleX = Math.round((objLodeRunner.posX-50)/30);
     const numCelluleY = Math.ceil((fltYTemporaire-50)/30);
-
     if(objNiveau.tableau[numCelluleY][numCelluleX] == ' ' ||
             objNiveau.tableau[numCelluleY][numCelluleX] == '_' ||
             objNiveau.tableau[numCelluleY][numCelluleX] == 'T'||

@@ -135,16 +135,30 @@ function dessinerFinPartie() {
     objC2D.save();
     objC2D.translate(objCanvas.width/2, objCanvas.height/3);
     objC2D.fillStyle = 'gray';
-    objC2D.fillRect(-objCanvas.width/8, 0,objCanvas.width/4, objCanvas.height/4);
+    objC2D.strokeStyle = 'black';
+    objC2D.lineWidth = 5;
+    objC2D.rect(-objCanvas.width/8, 0,objCanvas.width/4, objCanvas.height/4);
+    objC2D.fill();
+    objC2D.stroke();
 
     objC2D.beginPath();
-    objC2D.arc(0,0,objCanvas.width/8,0,2*Math.PI,false);
+    objC2D.arc(0,0,objCanvas.width/8,0,Math.PI,true);
     objC2D.fill();
+    objC2D.stroke();
 
     objC2D.font="30px Arial";
-    objC2D.fillStyle="red";
+    objC2D.fillStyle="#393939"; //gris foncé
     objC2D.textAlign = "center";
-    objC2D.fillText("R.I.P.", 0,0);
+    objC2D.fillText("R.I.P.", 0,-65);
+    objC2D.fillText("Lode Runner",0,-40);
+
+    objC2D.fillText("Niveau",-55,45);
+    objC2D.fillText("Score",-55,90);
+
+    objC2D.fillStyle = "#ec6621"; //orange
+    objC2D.fillText(objNiveau.numero,55,45);
+    objC2D.fillText(objPointage.scoreCumul+objNiveau.scoreNiveau,55,90);
+
     objC2D.restore();
 
 }
@@ -187,10 +201,13 @@ function niveauReussi() {
     objNiveau.numero = niveauSuivant;
 
     //Re init les trous
-    initTabTrous();
+    tabTrous = new Array();
 
     //Re init le temps 
     //Peut-être non nécessaire
+    objPointage.temps = new Date().getTime();
+    minutes = 0;
+    secondes = 0;
 
     //Re init lodeRunner
     initObjLodeRunner();
@@ -210,9 +227,12 @@ function mortLodeRunner() {
         if (nbVies != 0) {
             //Restart le niveau
             objPointage.binFinPartie = false;
+            objPointage.temps = new Date().getTime();
+            minutes = 0;
+            secondes = 0;
             initObjNiveau();
             objNiveau.numero = niveau;
-            initTabTrous();
+            tabTrous = new Array();
             initObjLodeRunner();
             objLodeRunner.nbVies = nbVies;
 
@@ -220,14 +240,20 @@ function mortLodeRunner() {
         }
         else {
             //GameOver
+            const pointDuNiveau = objNiveau.scoreNiveau;
+            objPointage.binEnMarche = false;
             objSons.gameOver.play();
             //Restart le niveau
+            objPointage.temps = new Date().getTime();
+            minutes = 0;
+            secondes = 0;
             initObjNiveau();
-            initTabTrous();
-            initPointage();
+            objNiveau.numero = niveau;
+            objNiveau.scoreNiveau = pointDuNiveau;
+            tabTrous = new Array();
             initObjLodeRunner();
+            objLodeRunner.nbVies = nbVies;
             initObjTabGardes();
-            initObjSons();
             objPointage.binFinPartie = true;
         }
     }

@@ -1,8 +1,9 @@
 function initPointage(){
-    const date = new Date();
+    //const date = new Date();
    
     objPointage = new Object();
-    objPointage.temps= date.getTime();
+    //objPointage.temps= date.getTime();
+    objPointage.temps = new Date().getTime();
     objPointage.binEnMarche=false;
     objPointage.scoreCumul = 0;
     objPointage.binFinPartie = false;
@@ -91,7 +92,7 @@ function initObjTabGardes(){
     /* */
 
     let objGarde = null;
-    const tabCouleur = ['red','blue','green','orange','brown','indigo','lime'];
+    const tabCouleur = ['red','blue','green','OrangeRed','brown','indigo','lime'];
     for(let i=0;i<nbGardes;i++){
         objGarde = new Object();
         objGarde.posX;

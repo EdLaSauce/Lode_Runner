@@ -93,7 +93,7 @@ function bougerVersLodeRunner(objGarde){
                     objGarde.etat = 0;
                 }
             }
-            console.log("etat: "+objGarde.etat+", cellule : "+objNiveau.tableau[numCelluleY][numCelluleX]);
+            //console.log("etat: "+objGarde.etat+", cellule : "+objNiveau.tableau[numCelluleY][numCelluleX]);
         }
         
 
@@ -133,7 +133,7 @@ function bougerVersLodeRunner(objGarde){
             }
         }
 
-        console.log("numCelluleBut:"+numCelluleBut);
+        //console.log("numCelluleBut:"+numCelluleBut);
        // console.log("Descendre! -> "+"numCelluleBut: "+numCelluleBut)
        const fltDifferenceX = (numCelluleBut*30 +50)-fltXGarde;
        
@@ -218,7 +218,6 @@ function bougerVersLodeRunner(objGarde){
             }
         
        }else if(objGarde.etat == 1){
-
            if(objNiveau.tableau[numCelluleY+1][numCelluleX+objGarde.intDirection] == '='
                 ||objNiveau.tableau[numCelluleY+1][numCelluleX+objGarde.intDirection]=='T'
                     ||objNiveau.tableau[numCelluleY+1][numCelluleX+objGarde.intDirection]=='G'){
@@ -247,10 +246,11 @@ function bougerVersLodeRunner(objGarde){
 }
 
 function chuteGarde(objGarde){
+    const fltTemporaireY = objGarde.posY + 2;
+    const numCelluleX = Math.round((objGarde.posX -50) / 30);
+    const numCelluleY = Math.ceil((fltTemporaireY-50) / 30);
     if(objGarde.etat == 2){
-        const fltTemporaireY = objGarde.posY + 2;
-        const numCelluleX = Math.round((objGarde.posX -50) / 30);
-        const numCelluleY = Math.ceil((fltTemporaireY-50) / 30);
+        
         //Centrer le garde dans la cellule
         objGarde.posX = numCelluleX * 30 + 50;
         if(objNiveau.tableau[Math.ceil((objGarde.posY-50)/30)][numCelluleX] != 'T'&&
@@ -265,6 +265,10 @@ function chuteGarde(objGarde){
             }else if(objNiveau.tableau[numCelluleY][numCelluleX] == 'T'){
                 objGarde.posY = numCelluleY * 30 + 50;
                 //Compter puis sortir du trou
+                if(objSons.gardeDansTrou.duration > 0){
+                    objSons.gardeDansTrou.currentTime = 0;
+                }
+                objSons.gardeDansTrou.play();
                 mettreObjet(numCelluleX,numCelluleY,'G');
                 if(objGarde.binLingot){
                     mettreObjet(numCelluleX,numCelluleY-1,'*');
@@ -277,17 +281,29 @@ function chuteGarde(objGarde){
                 objGarde.etat = 0;
             }
         }
+    }else if(objGarde.etat ==1){
+        if(objNiveau.tableau[Math.ceil((objGarde.posY-50)/30)][numCelluleX] == 'G'){
+            //le garde est pris dans le trou
+            objGarde.posY = objGarde.posY - (objGarde.vitesse/2);
+        }else if(objNiveau.tableau[Math.floor((objGarde.posY-50)/30)+1][numCelluleX] == 'G'){
+            objGarde.posY = Math.floor((objGarde.posY-50)/30)*30 + 50;
+            objGarde.etat = 0;
+        }
     }
 }
 
 function collision(objGarde){
-    const numCelluleX = Math.floor((objGarde.posX-50)/30);
-    const numCelluleY = Math.floor((objGarde.posY-50)/30);
+    const numCelluleX = Math.round((objGarde.posX-50)/30);
+    const numCelluleY = Math.round((objGarde.posY-50)/30);
     if(objNiveau.tableau[numCelluleY][numCelluleX] == '='){
         //console.log("Garde meure");
-        //objGarde.etat = 4;
-    }else if((objGarde.posX < (objLodeRunner.posX +largeurCellule)&&(objGarde.posX+largeurCellule)>objLodeRunner.posX)
-        &&(objGarde.posY <(objLodeRunner.posY+largeurCellule)&&(objGarde.posY+largeurCellule)>objLodeRunner.posY)){
+        objGarde.etat = 4;
+        if(objSons.gardeMort.duration >0){
+            objSons.gardeMort.currentTime = 0;
+        }
+        objSons.gardeMort.play();
+    }else if((objGarde.posX < (objLodeRunner.posX +(largeurCellule/2))&&(objGarde.posX+(largeurCellule/2))>objLodeRunner.posX)
+        &&(objGarde.posY <(objLodeRunner.posY+(hauteurCellule/2))&&(objGarde.posY+(hauteurCellule/2))>objLodeRunner.posY)){
         objLodeRunner.etat = 4;
     }
 }

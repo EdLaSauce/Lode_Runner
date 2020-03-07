@@ -70,7 +70,7 @@ function initObjLodeRunner(){
     objLodeRunner.posX = cellulesX/2 * largeurCellule+50;
     objLodeRunner.posY = 14*hauteurCellule +50;
     objLodeRunner.nbVies = 5;
-    objLodeRunner.vitesse = largeurCellule/4;
+    objLodeRunner.vitesse = largeurCellule/3;
     objLodeRunner.strCouleur = 'cornflowerblue';
     objLodeRunner.etat = 0;
     objLodeRunner.intDirection = 0;
@@ -100,6 +100,8 @@ function initObjTabGardes(){
         objGarde.strCouleur = 'red'; // Couleur différente pour chaque garde ?
         objGarde.vitesse = largeurCellule/20;
         objGarde.intDirection = 1;
+        objGarde.intNbDeplacementH=0;
+        objGarde.intNbDeplacementV=0;
 
         tabObjGardes.push(objGarde);
     }

@@ -8,6 +8,14 @@ function bougerVersLodeRunner(objGarde){
     const fltXLR = objLodeRunner.posX;
     const fltYLR = objLodeRunner.posY;
 
+
+    if (objGarde.etat == 3 || objGarde.etat == 0){
+        objGarde.intNbDeplacementH+=0.5;
+    }
+    if (objGarde.etat == 1 || objGarde.etat == 2){
+        objGarde.intNbDeplacementV+=0.5;
+    }
+
     /*
         Déterminer la différence des 2 personnage en Y
         une différence négative indique que le garde doit aller en direction -1 Y
@@ -219,7 +227,6 @@ function bougerVersLodeRunner(objGarde){
                 //console.log("Barre franchissement gauche/droite");
            }
        }else if(objGarde.etat == 3){
-
             objGarde.posX = objGarde.posX + (objGarde.vitesse * objGarde.intDirection);
             if(objNiveau.tableau[numCelluleY+1][numCelluleX+objGarde.intDirection]=='='){
                 objGarde.etat = 0;
@@ -228,6 +235,7 @@ function bougerVersLodeRunner(objGarde){
             }
        }
     }
+
 }
 
 function chuteGarde(objGarde){

@@ -28,7 +28,6 @@ function dessinerLodeRunner() {
     dessinerLodeRunnerHorizontal();
     dessinerLodeRunnerVertical();
     
-    objC2D.restore();
 }
 
 function dessinerLodeRunnerHorizontal() {
@@ -274,13 +273,6 @@ function dessinerLodeRunnerVertical() {
 
 function dessinerGarde(objGarde) {
 
-    const fltXGarde = objGarde.posX;
-    const fltYGarde = objGarde.posY;
-
-    const numCelluleX = Math.round((fltXGarde-50)/30 );
-    const numCelluleY = Math.floor((fltYGarde-50)/30);
-
-
     objC2D.save();
 
     objC2D.translate(objGarde.posX, objGarde.posY);
@@ -298,89 +290,207 @@ function dessinerGarde(objGarde) {
 
     //milieu du corps
     objC2D.fillRect(13, 11, 4.5, 10);
+    dessinerGardeHorizontale(objGarde);
+    dessinerGardeVertical(objGarde);
+   
+}
 
-    //État 0 :marche 
-    if (numCelluleX % 2 == 0 && objGarde.etat == 0) {
+function dessinerGardeHorizontale(objGarde){
+  //État 0 :marche 
+    console.log(objGarde.intNbDeplacementH)
+  if (objGarde.intNbDeplacementH % 10 != 0 && objGarde.etat == 0) {
+         //bras gauche
+         objC2D.save();
+         objC2D.rotate(6 * Math.PI / 16);
+         objC2D.fillRect(17, -4, 5.5, 3.3);
+         objC2D.restore();
+         objC2D.save();
+         objC2D.rotate(-1.5 * Math.PI / 8);
+         objC2D.fillRect(-1, 17, 5, 3.3);
+ 
+         objC2D.restore();
+ 
+         //bras droit
+         objC2D.save();
+         objC2D.rotate(3.5 * Math.PI / 16);
+         objC2D.fillRect(21, -1, 5.5, 3.3);
+         objC2D.restore();
+         objC2D.save();
+         objC2D.rotate(-2 * Math.PI / 8);
+         objC2D.fillRect(1, 24, 5, 3.3);
+         objC2D.restore();
+ 
+         objC2D.fillStyle = '#a09794';
+ 
+         //jambe droite
+         objC2D.save();
+         objC2D.rotate(-2 * Math.PI / 16);
+         objC2D.fillRect(5, 26, 3.5, 5);
+         objC2D.rotate(3 * Math.PI / 16);
+         objC2D.fillRect(21, 21, 3.5, 5);
+         objC2D.restore();
+ 
+         //jambe gauche
+         objC2D.save();
+         objC2D.rotate(2 * Math.PI / 16);
+         objC2D.fillRect(20, 13, 3.5, 7);
+         objC2D.rotate(2 * Math.PI / 16);
+         objC2D.fillRect(26, 10, 3.5, 5);
+         objC2D.restore();
+ 
+         objC2D.restore();
+
+}else if (objGarde.intNbDeplacementH % 10 == 0 && objGarde.etat == 0) {
+    //bras gauche
+    objC2D.save();
+    objC2D.rotate(2 * Math.PI / 16);
+    objC2D.fillRect(12, 6, 5.5, 3.3);
+    objC2D.restore();
+    objC2D.save();
+    objC2D.rotate(-1 * Math.PI / 8);
+    objC2D.fillRect(-1, 13, 5, 3.3);
+
+    objC2D.restore();
+
+    //bras droit
+    objC2D.save();
+    objC2D.rotate(-2 * Math.PI / 16);
+    objC2D.fillRect(10, 18, 5.5, 3.3);
+    objC2D.restore();
+    objC2D.save();
+    objC2D.rotate(-2 * Math.PI / 8);
+    objC2D.fillRect(5, 22, 5, 3.3);
+    objC2D.restore();
+
+    objC2D.fillStyle = '#a09794';
+    //jambe gauche
+    objC2D.save();
+    objC2D.rotate(3.5 * Math.PI / 16);
+    objC2D.fillRect(22, 7, 3.5, 7);
+    objC2D.rotate(7 * Math.PI / 16);
+    objC2D.fillRect(16, -22, 3.5, 7);
+    objC2D.restore();
+
+    //jambe droite
+    objC2D.save();
+    objC2D.rotate(-7 * Math.PI / 16);
+    objC2D.fillRect(-20, 18, 3.5, 7);
+    objC2D.rotate(-7 * Math.PI / 16);
+    objC2D.fillRect(-30, -20, 3.5, 8);
+    objC2D.restore();
+
+    objC2D.restore();
+}else if (objGarde.etat == 3) {
+    //état 3: barre de franchissement
+    objC2D.fillStyle = '#a09794';
+
+    if (objGarde.intNbDeplacementH % 10 == 0) {
         objC2D.save();
-        objC2D.rotate(6 * Math.PI / 16);
-        objC2D.fillRect(17, -4, 5.5, 3.3);
+        objC2D.rotate(-2 * Math.PI / 16);
+        objC2D.fillRect(5, 25, 3.5, 6);
+        objC2D.rotate(3 * Math.PI / 16);
+        objC2D.fillRect(22, 21, 3.5, 5);
         objC2D.restore();
+
+        objC2D.scale(-1, 1);
+        objC2D.translate(-30, 0);
+
         objC2D.save();
-        objC2D.rotate(-1.5 * Math.PI / 8);
-        objC2D.fillRect(-1, 17, 5, 3.3);
-
+        objC2D.rotate(-2 * Math.PI / 16);
+        objC2D.fillRect(5, 25, 3.5, 5);
+        objC2D.rotate(3 * Math.PI / 16);
+        objC2D.fillRect(21, 20, 3.5, 5);
         objC2D.restore();
-
-        //bras droit
-        objC2D.save();
-        objC2D.rotate(3.5 * Math.PI / 16);
-        objC2D.fillRect(21, -1, 5.5, 3.3);
-        objC2D.restore();
-        objC2D.save();
-        objC2D.rotate(-2 * Math.PI / 8);
-        objC2D.fillRect(1, 24, 5, 3.3);
-        objC2D.restore();
-
-        objC2D.fillStyle = '#a09794';
-
-        //jambe droite
+    } else {
         objC2D.save();
         objC2D.rotate(-2 * Math.PI / 16);
         objC2D.fillRect(5, 26, 3.5, 5);
         objC2D.rotate(3 * Math.PI / 16);
-        objC2D.fillRect(21, 21, 3.5, 5);
+        objC2D.fillRect(21, 22, 3.5, 5);
         objC2D.restore();
 
-        //jambe gauche
         objC2D.save();
         objC2D.rotate(2 * Math.PI / 16);
         objC2D.fillRect(20, 13, 3.5, 7);
         objC2D.rotate(2 * Math.PI / 16);
         objC2D.fillRect(26, 10, 3.5, 5);
         objC2D.restore();
+    }
 
-        objC2D.restore();
+    objC2D.fillStyle = objGarde.strCouleur;
+    //bras gauche
+    objC2D.save();
+    objC2D.rotate(6 * Math.PI / 16);
+    objC2D.fillRect(17, -4, 5.5, 3.3);
+    objC2D.restore();
+    objC2D.save();
+    objC2D.rotate(-1.5 * Math.PI / 8);
+    objC2D.fillRect(-1, 17, 5, 3.3);
 
-    }else {
-    
+    objC2D.restore();
+
+    //bras droit
+    objC2D.save();
+    objC2D.rotate(-2 * Math.PI / 16);
+    objC2D.fillRect(10, 18, 5.5, 3.3);
+    objC2D.restore();
+    objC2D.save();
+    objC2D.rotate(-2 * Math.PI / 8);
+    objC2D.fillRect(5, 22, 5, 3.3);
+    objC2D.restore();
+
+    objC2D.restore();
+} 
+}
+
+function dessinerGardeVertical(objGarde){
+    if (objGarde.etat == 1 || objGarde.etat == 2) {
+        //état 2 : chuter
+        //état 1: monter/descendre et sortir du trou
+
+        if ( objGarde.intNbDeplacementV % 10 == 0) {
+            objC2D.scale(-1, 1);
+            objC2D.translate(-30, 0);
+        }
         //bras gauche
         objC2D.save();
-        objC2D.rotate(2 * Math.PI / 16);
-        objC2D.fillRect(12, 6, 5.5, 3.3);
-        objC2D.restore();
-        objC2D.save();
-        objC2D.rotate(-1 * Math.PI / 8);
-        objC2D.fillRect(-1, 13, 5, 3.3);
-    
-        objC2D.restore();
-    
-        //bras droit
-        objC2D.save();
-        objC2D.rotate(-2 * Math.PI / 16);
-        objC2D.fillRect(10, 18, 5.5, 3.3);
+        objC2D.rotate(7 * Math.PI / 16);
+        objC2D.fillRect(14, -7, 5.5, 3.3);
         objC2D.restore();
         objC2D.save();
         objC2D.rotate(-2 * Math.PI / 8);
-        objC2D.fillRect(5, 22, 5, 3.3);
+        objC2D.fillRect(-5, 17, 5, 3.3);
+
         objC2D.restore();
-    
+
+        //bras gauche
+        objC2D.save();
+        objC2D.rotate(-4 * Math.PI / 16);
+        objC2D.fillRect(2, 21, 5, 3.3);
+        objC2D.restore();
+        objC2D.save();
+        objC2D.rotate(-2.5 * Math.PI / 8);
+        objC2D.fillRect(2, 22, 5, 3.3);
+        objC2D.restore();
+
         objC2D.fillStyle = '#a09794';
+
         //jambe gauche
         objC2D.save();
-        objC2D.rotate(3.5 * Math.PI / 16);
-        objC2D.fillRect(22, 7, 3.5, 7);
-        objC2D.rotate(7 * Math.PI / 16);
-        objC2D.fillRect(16, -22, 3.5, 7);
+        objC2D.rotate(1.5 * Math.PI / 16);
+        objC2D.fillRect(25, 10, 3.5, 7);
+        objC2D.rotate(2 * Math.PI / 16);
+        objC2D.fillRect(26, 0, 3.5, 8);
         objC2D.restore();
-    
+
         //jambe droite
         objC2D.save();
-        objC2D.rotate(-7 * Math.PI / 16);
-        objC2D.fillRect(-20, 18, 3.5, 7);
-        objC2D.rotate(-7 * Math.PI / 16);
-        objC2D.fillRect(-30, -20, 3.5, 8);
+        objC2D.rotate(1 * Math.PI / 16);
+        objC2D.fillRect(17, 22, 3.5, 7);
+        objC2D.rotate(2 * Math.PI / 16);
+        objC2D.fillRect(24, 9, 4, 5);
         objC2D.restore();
-    
+
         objC2D.restore();
     }
 }

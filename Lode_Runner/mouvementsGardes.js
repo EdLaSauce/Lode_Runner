@@ -56,7 +56,6 @@ function bougerVersLodeRunner(objGarde){
         */
         if(numCelluleBut != null){
             if(objGarde.etat == 0 || objGarde.etat == 3){
-                objGarde.intNbDeplacementH+=1;
                 //si je marche ou franchi une barre
     
                 const fltDifferenceX = (numCelluleBut*30 + 50) - fltXGarde;
@@ -132,7 +131,6 @@ function bougerVersLodeRunner(objGarde){
        
 
         if(objGarde.etat == 0){
-            objGarde.intNbDeplacementH+=1;
             //Si je marche
             if(fltDifferenceX < 0){
                 objGarde.intDirection = -1;
@@ -157,7 +155,7 @@ function bougerVersLodeRunner(objGarde){
             }
         }
         else if(objGarde.etat == 3){
-            objGarde.intNbDeplacementH+=1;
+
             //Si je franchi une barre
 
             //Se laisser tomber
@@ -166,8 +164,6 @@ function bougerVersLodeRunner(objGarde){
             },250);
 
         }else if(objGarde.etat == 1){
-          objGarde.intNbDeplacementV+=1;
-        
             if(objNiveau.tableau[numCelluleY+1][numCelluleX] == '#'){
                 //Il y a une échelle plus bas
                 objGarde.posY = objGarde.posY + objGarde.vitesse;
@@ -191,7 +187,7 @@ function bougerVersLodeRunner(objGarde){
        }
 
        if(objGarde.etat == 0){
-        objGarde.intNbDeplacementH+=1;
+
             let binPeutBouger = true;
             if(objNiveau.tableau[numCelluleY][numCelluleX+objGarde.intDirection] == '='){
                 binPeutBouger =false;
@@ -210,7 +206,6 @@ function bougerVersLodeRunner(objGarde){
             }
         
        }else if(objGarde.etat == 1){
-        objGarde.intNbDeplacementV+=1;
 
            if(objNiveau.tableau[numCelluleY+1][numCelluleX+objGarde.intDirection] == '='
                 ||objNiveau.tableau[numCelluleY+1][numCelluleX+objGarde.intDirection]=='T'
@@ -224,7 +219,7 @@ function bougerVersLodeRunner(objGarde){
                 //console.log("Barre franchissement gauche/droite");
            }
        }else if(objGarde.etat == 3){
-        objGarde.intNbDeplacementH+=1;
+
             objGarde.posX = objGarde.posX + (objGarde.vitesse * objGarde.intDirection);
             if(objNiveau.tableau[numCelluleY+1][numCelluleX+objGarde.intDirection]=='='){
                 objGarde.etat = 0;

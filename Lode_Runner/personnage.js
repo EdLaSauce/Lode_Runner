@@ -28,6 +28,7 @@ function dessinerLodeRunner() {
     dessinerLodeRunnerHorizontal();
     dessinerLodeRunnerVertical();
     
+    objC2D.restore();
 }
 
 function dessinerLodeRunnerHorizontal() {
@@ -38,6 +39,7 @@ function dessinerLodeRunnerHorizontal() {
         objC2D.rotate(2 * Math.PI / 16);
         objC2D.fillRect(12, 6, 5.5, 3.3);
         objC2D.restore();
+        
         objC2D.save();
         objC2D.rotate(-1 * Math.PI / 8);
         objC2D.fillRect(-1, 13, 5, 3.3);
@@ -49,6 +51,7 @@ function dessinerLodeRunnerHorizontal() {
         objC2D.rotate(-2 * Math.PI / 16);
         objC2D.fillRect(10, 18, 5.5, 3.3);
         objC2D.restore();
+
         objC2D.save();
         objC2D.rotate(-2 * Math.PI / 8);
         objC2D.fillRect(5, 22, 5, 3.3);
@@ -79,10 +82,10 @@ function dessinerLodeRunnerHorizontal() {
         objC2D.rotate(6 * Math.PI / 16);
         objC2D.fillRect(17, -4, 5.5, 3.3);
         objC2D.restore();
+
         objC2D.save();
         objC2D.rotate(-1.5 * Math.PI / 8);
         objC2D.fillRect(-1, 17, 5, 3.3);
-
         objC2D.restore();
 
         //bras droit
@@ -157,6 +160,7 @@ function dessinerLodeRunnerHorizontal() {
         objC2D.rotate(6 * Math.PI / 16);
         objC2D.fillRect(17, -4, 5.5, 3.3);
         objC2D.restore();
+
         objC2D.save();
         objC2D.rotate(-1.5 * Math.PI / 8);
         objC2D.fillRect(-1, 17, 5, 3.3);
@@ -168,6 +172,7 @@ function dessinerLodeRunnerHorizontal() {
         objC2D.rotate(-2 * Math.PI / 16);
         objC2D.fillRect(10, 18, 5.5, 3.3);
         objC2D.restore();
+
         objC2D.save();
         objC2D.rotate(-2 * Math.PI / 8);
         objC2D.fillRect(5, 22, 5, 3.3);
@@ -181,10 +186,10 @@ function dessinerLodeRunnerHorizontal() {
         objC2D.rotate(5 * Math.PI / 16);
         objC2D.fillRect(17, -4, 5.5, 3.3);
         objC2D.restore();
+
         objC2D.save();
         objC2D.rotate(-1.5 * Math.PI / 8);
         objC2D.fillRect(-1, 17, 5, 3.3);
-
         objC2D.restore();
 
         //bras droit
@@ -192,6 +197,7 @@ function dessinerLodeRunnerHorizontal() {
         objC2D.rotate(3.5 * Math.PI / 16);
         objC2D.fillRect(21, -1, 5.5, 3.3);
         objC2D.restore();
+
         objC2D.save();
         objC2D.rotate(-4 * Math.PI / 8);
         objC2D.fillRect(-19, 20, 5, 3.3);
@@ -233,10 +239,10 @@ function dessinerLodeRunnerVertical() {
         objC2D.rotate(7 * Math.PI / 16);
         objC2D.fillRect(14, -7, 5.5, 3.3);
         objC2D.restore();
+
         objC2D.save();
         objC2D.rotate(-2 * Math.PI / 8);
         objC2D.fillRect(-5, 17, 5, 3.3);
-
         objC2D.restore();
 
         //bras gauche
@@ -290,15 +296,18 @@ function dessinerGarde(objGarde) {
 
     //milieu du corps
     objC2D.fillRect(13, 11, 4.5, 10);
+
     dessinerGardeHorizontale(objGarde);
     dessinerGardeVertical(objGarde);
+
+    objC2D.restore();
    
 }
 
 function dessinerGardeHorizontale(objGarde){
   //État 0 :marche 
     console.log(objGarde.intNbDeplacementH)
-  if (objGarde.intNbDeplacementH % 10 != 0 && objGarde.etat == 0) {
+  if (objGarde.intNbDeplacementH % 10 == 0 && objGarde.etat == 0) {
          //bras gauche
          objC2D.save();
          objC2D.rotate(6 * Math.PI / 16);
@@ -340,7 +349,7 @@ function dessinerGardeHorizontale(objGarde){
  
          objC2D.restore();
 
-}else if (objGarde.intNbDeplacementH % 10 == 0 && objGarde.etat == 0) {
+}else if (objGarde.intNbDeplacementH % 10 != 0 && objGarde.etat == 0) {
     //bras gauche
     objC2D.save();
     objC2D.rotate(2 * Math.PI / 16);

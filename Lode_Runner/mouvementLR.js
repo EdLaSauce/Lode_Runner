@@ -296,6 +296,4 @@ function mettreAJourPositionLR() {
             objSons.chute.pause();
         }
     }
-
-    
 }

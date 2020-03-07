@@ -82,10 +82,10 @@ function initObjLodeRunner(){
 function initObjTabGardes(){
     tabObjGardes = new Array();
 
-    //let nbGardes = objNiveau.numero +2;
+    let nbGardes = objNiveau.numero +2;
     
     /* A fin de tests uniquement */
-    let nbGardes = 1;
+    //let nbGardes = 1;
     /* */
 
     let objGarde = null;
@@ -94,12 +94,7 @@ function initObjTabGardes(){
         objGarde = new Object();
         objGarde.posX;
         objGarde.posY;
-        /* A des fins de tests uniquement
-       assignerPosition(objGarde);
-       */
-        objGarde.posX = 12 * 30 +50;
-        objGarde.posY = 30+50;
-       /* */
+        assignerPosition(objGarde);
         objGarde.binLingot = false;
         objGarde.etat = 0;
         objGarde.strCouleur = 'red'; // Couleur différente pour chaque garde ?
@@ -149,6 +144,7 @@ function initObjNiveau(){
         ];
     objNiveau.tabEmplacements = new Array();
     emplacementsDepart();
+    //console.log(objNiveau.tabEmplacements);
 }
 
 function initTabTrous(){
@@ -174,10 +170,8 @@ function emplacementsDepart(){
 
 function assignerPosition(objGarde){
     let random = Math.floor(Math.random()*objNiveau.tabEmplacements.length);
-    //console.log("random: "+random);
-    let posX = objNiveau.tabEmplacements[random][0];
-    let posY = objNiveau.tabEmplacements[random][1];
-   // console.log("X: "+posX+" , Y: "+posY);
+    let posX = objNiveau.tabEmplacements[random][0]*largeurCellule+50;
+    let posY = objNiveau.tabEmplacements[random][1]*hauteurCellule+50;
     let binDejaAssigne = false;
    for(let i = 0; i < tabObjGardes.length;i++){
        if(tabObjGardes[i].posX == posX && tabObjGardes[i].posY == posY){
@@ -187,7 +181,7 @@ function assignerPosition(objGarde){
    if(binDejaAssigne){
        assignerPosition(objGarde);
    }else{
-       objGarde.posX = posX*largeurCellule+50;
-       objGarde.posY = posY*hauteurCellule+50;
+       objGarde.posX = posX;
+       objGarde.posY = posY;
    }
 }

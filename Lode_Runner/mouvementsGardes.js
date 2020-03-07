@@ -26,6 +26,7 @@ function bougerVersLodeRunner(objGarde){
 
     //La cellule recherchee (echelle, vide, barre, etc)
     let numCelluleBut = null;
+    let intCelluleBloque = 0;
 
     if(objNiveau.tableau[numCelluleY][numCelluleX]=='*' && objGarde.binLingot == false){
         objGarde.binLingot = true;
@@ -100,20 +101,38 @@ function bougerVersLodeRunner(objGarde){
         /*
         trouver l'echelle la plus proche ou le vide le plus proche
         */
+
+        //Empecher de passer si blocage.
+        for(let i =0;i<cellulesX;i++){
+            if(objNiveau.tableau[numCelluleY][i] == '='){
+                if(numCelluleBut <= i ){
+                    intCelluleBloque = i;
+                    console.log("blocage à gauche");
+                }else if(numCelluleBut >= i){
+                    intCelluleBloque=i;
+                    console.log("blocage à droite");
+                }
+            }
+        }
+        console.log("intCelluleBloque: "+intCelluleBloque);
+
         let diffCellule = cellulesX;
-        for(let i = 0; i<cellulesX;i++){
+        for(let i = intCelluleBloque; i<cellulesX;i++){
             if(objNiveau.tableau[numCelluleY+1][i] == '#' || objNiveau.tableau[numCelluleY+1][i] == ' '){
-                if(Math.abs(i-numCelluleX)<diffCellule){
+                if(Math.abs(i-numCelluleX)<diffCellule&& i != numCelluleBut){
                     diffCellule = Math.abs(i-numCelluleX);
                     numCelluleBut = i;
                 }
             }
         }
+
+        console.log("numCelluleBut:"+numCelluleBut);
        // console.log("Descendre! -> "+"numCelluleBut: "+numCelluleBut)
+       const fltDifferenceX = (numCelluleBut*30 +50)-fltXGarde;
+       
 
         if(objGarde.etat == 0){
             //Si je marche
-            const fltDifferenceX = (numCelluleBut*30 +50)-fltXGarde;
             if(fltDifferenceX < 0){
                 objGarde.intDirection = -1;
             }else if(fltDifferenceX > 0){
@@ -131,9 +150,7 @@ function bougerVersLodeRunner(objGarde){
                     objGarde.etat = 2;
                 }
             }
-
-
-            // penser à ajouter la condition != '=' pour ne pas traverser les murs
+            
             if(objGarde.etat != 2 && objGarde.etat != 1){
                 objGarde.posX = objGarde.posX + (objGarde.vitesse * objGarde.intDirection);
             }

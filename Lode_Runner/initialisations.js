@@ -5,6 +5,7 @@ function initPointage(){
     objPointage.temps= date.getTime();
     objPointage.binEnMarche=false;
     objPointage.scoreCumul = 0;
+    objPointage.binFinPartie = false;
 }
 
 function initObjSons(){

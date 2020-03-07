@@ -202,6 +202,14 @@ function mortLodeRunner(){
         else{
             //GameOver
             objSons.gameOver.play();
+            objPointage.binFinPartie=true;
+            //Restart le niveau
+            initObjNiveau();
+            initTabTrous();
+            initPointage();
+            initObjLodeRunner();
+            initObjTabGardes();
+            initObjSons();
         }
     }
 }

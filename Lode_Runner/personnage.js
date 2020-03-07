@@ -310,12 +310,7 @@ function dessinerGarde(objGarde) {
 
 function dessinerGardeHorizontale(objGarde){
   //État 0 :marche 
-<<<<<<< HEAD
-    console.log(objGarde.intNbDeplacementH)
-  if (objGarde.intNbDeplacementH % 10 == 0 && objGarde.etat == 0) {
-=======
   if (objGarde.intNbDeplacementH % 15 < 7 && objGarde.etat == 0) {
->>>>>>> 69f2af1a0a5a0fa7cb59731154e39d5644934df1
          //bras gauche
          objC2D.save();
          objC2D.rotate(6 * Math.PI / 16);
@@ -357,17 +352,6 @@ function dessinerGardeHorizontale(objGarde){
  
          objC2D.restore();
 
-<<<<<<< HEAD
-}else if (objGarde.intNbDeplacementH % 10 != 0 && objGarde.etat == 0) {
-    //bras gauche
-    objC2D.save();
-    objC2D.rotate(2 * Math.PI / 16);
-    objC2D.fillRect(12, 6, 5.5, 3.3);
-    objC2D.restore();
-    objC2D.save();
-    objC2D.rotate(-1 * Math.PI / 8);
-    objC2D.fillRect(-1, 13, 5, 3.3);
-=======
     }else if (objGarde.intNbDeplacementH % 15 >= 7 && objGarde.etat == 0) {
         //bras gauche
         objC2D.save();
@@ -377,7 +361,6 @@ function dessinerGardeHorizontale(objGarde){
         objC2D.save();
         objC2D.rotate(-1 * Math.PI / 8);
         objC2D.fillRect(-1, 13, 5, 3.3);
->>>>>>> 69f2af1a0a5a0fa7cb59731154e39d5644934df1
 
         objC2D.restore();
 

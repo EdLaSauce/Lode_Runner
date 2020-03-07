@@ -71,7 +71,8 @@ function initObjLodeRunner(){
     objLodeRunner.posY = 14*hauteurCellule +50;
     objLodeRunner.nbVies = 5;
     objLodeRunner.vitesse = largeurCellule/3;
-    objLodeRunner.strCouleur = 'cornflowerblue';
+    //objLodeRunner.strCouleur = 'cornflowerblue';
+    objLodeRunner.strCouleur = 'white';
     objLodeRunner.etat = 0;
     objLodeRunner.intDirection = 0;
     objLodeRunner.imageDroiteGauche = 0;
@@ -89,7 +90,7 @@ function initObjTabGardes(){
     /* */
 
     let objGarde = null;
-    // let tabCouleur = [];
+    const tabCouleur = ['red','blue','green','orange','brown','indigo','lime'];
     for(let i=0;i<nbGardes;i++){
         objGarde = new Object();
         objGarde.posX;
@@ -97,7 +98,7 @@ function initObjTabGardes(){
         assignerPosition(objGarde);
         objGarde.binLingot = false;
         objGarde.etat = 0;
-        objGarde.strCouleur = 'red'; // Couleur différente pour chaque garde ?
+        objGarde.strCouleur = tabCouleur[i]; // Couleur différente pour chaque garde ?
         objGarde.vitesse = largeurCellule/20;
         objGarde.intDirection = 1;
         objGarde.intNbDeplacementH=0;

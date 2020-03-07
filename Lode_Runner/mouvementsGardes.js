@@ -8,14 +8,6 @@ function bougerVersLodeRunner(objGarde){
     const fltXLR = objLodeRunner.posX;
     const fltYLR = objLodeRunner.posY;
 
-
-    if (objGarde.etat == 3 || objGarde.etat == 0){
-        objGarde.intNbDeplacementH+=0.5;
-    }
-    if (objGarde.etat == 1 || objGarde.etat == 2){
-        objGarde.intNbDeplacementV+=0.5;
-    }
-
     /*
         Déterminer la différence des 2 personnage en Y
         une différence négative indique que le garde doit aller en direction -1 Y
@@ -33,7 +25,8 @@ function bougerVersLodeRunner(objGarde){
 
     //La cellule recherchee (echelle, vide, barre, etc)
     let numCelluleBut = null;
-    let intCelluleBloque = 0;
+    let intCelluleBloqueGauche = 0;
+    let intCelluleBloqueDroite = cellulesX;
 
     if(objNiveau.tableau[numCelluleY][numCelluleX]=='*' && objGarde.binLingot == false){
         objGarde.binLingot = true;
@@ -79,19 +72,23 @@ function bougerVersLodeRunner(objGarde){
     
                 if(objGarde.etat != 1){
                     objGarde.posX = objGarde.posX + (objGarde.vitesse * objGarde.intDirection);
+                    //objGarde.intNbDeplacementH++;
                 }
     
             }else if(objGarde.etat == 1){
                 //je monte une echelle
                 if(objNiveau.tableau[numCelluleY][numCelluleX] == '#'){
                     objGarde.posY = objGarde.posY - objGarde.vitesse;
+                    //objGarde.intNbDeplacementV++;
                 }else if(objNiveau.tableau[numCelluleY+1][numCelluleX]== '#'
                             &&(objNiveau.tableau[numCelluleY][numCelluleX]== ' '
                                 ||objNiveau.tableau[numCelluleY][numCelluleX]=='-')){
                     objGarde.posY = objGarde.posY - objGarde.vitesse;
+                    //objGarde.intNbDeplacementV++;
                 }else if(objNiveau.tableau[numCelluleY][numCelluleX] == 'G' ||
                             objNiveau.tableau[numCelluleY+1][numCelluleX]=='G'){
                     objGarde.posY = objGarde.posY - objGarde.vitesse;
+                    //objGarde.intNbDeplacementV++;
                 }else{
                     objGarde.etat = 0;
                 }
@@ -109,24 +106,27 @@ function bougerVersLodeRunner(objGarde){
         trouver l'echelle la plus proche ou le vide le plus proche
         */
 
-        //Empecher de passer si blocage.
-        for(let i =0;i<cellulesX;i++){
+        //Voir blocages à gauche.
+        let binGauche = false;
+        for(let i =numCelluleX;i>=0&&!binGauche;i--){
             if(objNiveau.tableau[numCelluleY][i] == '='){
-                if(numCelluleBut <= i ){
-                    intCelluleBloque = i;
-                    console.log("blocage à gauche");
-                }else if(numCelluleBut >= i){
-                    intCelluleBloque=i;
-                    console.log("blocage à droite");
-                }
+                intCelluleBloqueGauche = i;
+                binGauche=true;
             }
         }
-        console.log("intCelluleBloque: "+intCelluleBloque);
+
+        let binDroite = false;
+        for(let i =numCelluleX;i<cellulesX&&!binDroite;i++){
+            if(objNiveau.tableau[numCelluleY][i] == '='){
+                intCelluleBloqueDroite = i;
+                binDroite=true;
+            }
+        }
 
         let diffCellule = cellulesX;
-        for(let i = intCelluleBloque; i<cellulesX;i++){
+        for(let i = intCelluleBloqueGauche; i<intCelluleBloqueDroite;i++){
             if(objNiveau.tableau[numCelluleY+1][i] == '#' || objNiveau.tableau[numCelluleY+1][i] == ' '){
-                if(Math.abs(i-numCelluleX)<diffCellule&& i != numCelluleBut){
+                if(Math.abs(i-numCelluleX)<diffCellule){
                     diffCellule = Math.abs(i-numCelluleX);
                     numCelluleBut = i;
                 }
@@ -160,6 +160,7 @@ function bougerVersLodeRunner(objGarde){
             
             if(objGarde.etat != 2 && objGarde.etat != 1){
                 objGarde.posX = objGarde.posX + (objGarde.vitesse * objGarde.intDirection);
+                //objGarde.intNbDeplacementH++;
             }
         }
         else if(objGarde.etat == 3){
@@ -175,9 +176,11 @@ function bougerVersLodeRunner(objGarde){
             if(objNiveau.tableau[numCelluleY+1][numCelluleX] == '#'){
                 //Il y a une échelle plus bas
                 objGarde.posY = objGarde.posY + objGarde.vitesse;
+                //objGarde.intNbDeplacementV++;
             }else if(objNiveau.tableau[numCelluleY][numCelluleX] == 'G' ||
                     objNiveau.tableau[numCelluleY+1][numCelluleX]=='G'){
                         objGarde.posY = objGarde.posY - objGarde.vitesse;
+                        //objGarde.intNbDeplacementV++;
             }else if(objNiveau.tableau[numCelluleY+1][numCelluleX] == '='){
                 // il y a une passerelle plus bas
                 objGarde.etat = 0;
@@ -208,6 +211,7 @@ function bougerVersLodeRunner(objGarde){
             
             if(binPeutBouger){
                 objGarde.posX = objGarde.posX + (objGarde.vitesse * objGarde.intDirection);
+                //objGarde.intNbDeplacementH++;
                 console.log("vers LR");
             }else{
                 console.log("Bloqué");
@@ -235,7 +239,11 @@ function bougerVersLodeRunner(objGarde){
             }
        }
     }
-
+    if (objGarde.etat == 3 || objGarde.etat == 0){
+        objGarde.intNbDeplacementH++;
+    }else if (objGarde.etat == 1){
+        objGarde.intNbDeplacementV++;
+    }
 }
 
 function chuteGarde(objGarde){

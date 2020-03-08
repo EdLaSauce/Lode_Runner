@@ -148,6 +148,7 @@ function initObjNiveau(){
         /*16 */['B','B','B','B','B','B','B','B','B','B','B','B','B','B','B','B','B','B','B','B','B','B','B','B','B','B','B','B']
         ];
     objNiveau.tabEmplacements = new Array();
+    objNiveau.tabReapparition = new Array();
     emplacementsDepart();
     //console.log(objNiveau.tabEmplacements);
 }
@@ -167,6 +168,9 @@ function emplacementsDepart(){
     for(let i=0;i<tableau.length;i++){
         for(let j=0;j<tableau[i].length;j++){
             if(tableau[i][j]=="_"){
+                if(i == 1){
+                    objNiveau.tabReapparition.push([j,i]);
+                }
                 objNiveau.tabEmplacements.push([j,i]);
             }
         }

@@ -125,21 +125,27 @@ function gaucheDroiteEchelle(){
     const numCelluleY = Math.ceil((fltYTemporaire-50)/30);
 
     console.log('X :' + numCelluleX + ' Y : ' + numCelluleY)
-/*
+
    if (objLodeRunner.intDirection == -1){
         if(objNiveau.tableau[numCelluleY+1][numCelluleX-1] == '='){
             objLodeRunner.posY = numCelluleY * 30 +50;
             objLodeRunner.posX =numCelluleX* 30 + 50;
             objLodeRunner.etat=0;
-        }
+        }/*else if (objNiveau.tableau[numCelluleY+1][numCelluleX-1] == '-'){
+           // objLodeRunner.posY = numCelluleY*30+50;
+            objLodeRunner.posX =numCelluleX* 30 + 50;
+                objLodeRunner.etat=3;
+        }*/
     }else if (objLodeRunner.intDirection == 1){
-        if(objNiveau.tableau[numCelluleY+1][numCelluleX+1] == '='){
+        if(objNiveau.tableau[numCelluleY+1][numCelluleX+1] == '=' ){
             objLodeRunner.posX =numCelluleX* 30 + 50;
             objLodeRunner.etat=0;
-        } else if (objNiveau.tableau[numCelluleY+1][numCelluleX+1] == ' '){
-            objLodeRunner.etat=2;
-        }
-    }*/
+        } /*else if (objNiveau.tableau[numCelluleY+1][numCelluleX+1] == '-'){
+            objLodeRunner.posY = (numCelluleY+1)*30+50;
+            objLodeRunner.posX =numCelluleX* 30 + 50;
+                objLodeRunner.etat=3;
+        }*/
+    }
     
 
 }

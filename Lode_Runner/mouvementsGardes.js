@@ -235,6 +235,7 @@ function bougerVersLodeRunner(objGarde){
                 objGarde.etat = 0;
             }else if(objNiveau.tableau[numCelluleY+1][numCelluleX+objGarde.intDirection]=='T'){
                 objGarde.etat  =2;
+                console.log('prrr')
             }
        }
     }
@@ -277,6 +278,10 @@ function chuteGarde(objGarde){
                 setTimeout(()=>{
                     objGarde.etat =1;
                 },4000)
+
+                //ajout score lorsque garde tombe dans un trou
+                objNiveau.scoreNiveau += 75;
+
             }else{
                 objGarde.etat = 0;
             }

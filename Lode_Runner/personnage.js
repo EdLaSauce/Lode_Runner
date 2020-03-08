@@ -282,11 +282,7 @@ function dessinerGarde(objGarde) {
     objC2D.save();
 
     objC2D.translate(objGarde.posX, objGarde.posY);
-
-    if (objGarde.intDirection == -1) {
-        objC2D.scale(-1, 1);
-        objC2D.translate(-30, 0);
-    }
+    
     objC2D.fillStyle = '#a09794';
     objC2D.beginPath();
     objC2D.arc(15, 6, 5, 0, 2 * Math.PI);
@@ -300,6 +296,11 @@ function dessinerGarde(objGarde) {
 
     //milieu du corps
     objC2D.fillRect(13, 11, 4.5, 10);
+
+    if (objGarde.intDirection == -1) {
+        objC2D.scale(-1, 1);
+        objC2D.translate(-30, 0);
+    }
 
     dessinerGardeHorizontale(objGarde);
     dessinerGardeVertical(objGarde);
@@ -316,10 +317,10 @@ function dessinerGardeHorizontale(objGarde){
          objC2D.rotate(6 * Math.PI / 16);
          objC2D.fillRect(17, -4, 5.5, 3.3);
          objC2D.restore();
+
          objC2D.save();
          objC2D.rotate(-1.5 * Math.PI / 8);
          objC2D.fillRect(-1, 17, 5, 3.3);
- 
          objC2D.restore();
  
          //bras droit
@@ -327,6 +328,7 @@ function dessinerGardeHorizontale(objGarde){
          objC2D.rotate(3.5 * Math.PI / 16);
          objC2D.fillRect(21, -1, 5.5, 3.3);
          objC2D.restore();
+
          objC2D.save();
          objC2D.rotate(-2 * Math.PI / 8);
          objC2D.fillRect(1, 24, 5, 3.3);
@@ -350,7 +352,6 @@ function dessinerGardeHorizontale(objGarde){
          objC2D.fillRect(26, 10, 3.5, 5);
          objC2D.restore();
  
-         objC2D.restore();
 
     }else if (objGarde.intNbDeplacementH % 15 >= 7 && objGarde.etat == 0) {
         //bras gauche
@@ -358,10 +359,10 @@ function dessinerGardeHorizontale(objGarde){
         objC2D.rotate(2 * Math.PI / 16);
         objC2D.fillRect(12, 6, 5.5, 3.3);
         objC2D.restore();
+
         objC2D.save();
         objC2D.rotate(-1 * Math.PI / 8);
         objC2D.fillRect(-1, 13, 5, 3.3);
-
         objC2D.restore();
 
         //bras droit
@@ -369,6 +370,7 @@ function dessinerGardeHorizontale(objGarde){
         objC2D.rotate(-2 * Math.PI / 16);
         objC2D.fillRect(10, 18, 5.5, 3.3);
         objC2D.restore();
+
         objC2D.save();
         objC2D.rotate(-2 * Math.PI / 8);
         objC2D.fillRect(5, 22, 5, 3.3);
@@ -391,7 +393,6 @@ function dessinerGardeHorizontale(objGarde){
         objC2D.fillRect(-30, -20, 3.5, 8);
         objC2D.restore();
 
-        objC2D.restore();
     }else if (objGarde.etat == 3) {
         //état 3: barre de franchissement
         objC2D.fillStyle = '#a09794';
@@ -439,10 +440,10 @@ function dessinerGardeHorizontale(objGarde){
         objC2D.rotate(6 * Math.PI / 16);
         objC2D.fillRect(17, -4, 5.5, 3.3);
         objC2D.restore();
+
         objC2D.save();
         objC2D.rotate(-1.5 * Math.PI / 8);
         objC2D.fillRect(-1, 17, 5, 3.3);
-
         objC2D.restore();
 
         //bras droit
@@ -450,12 +451,12 @@ function dessinerGardeHorizontale(objGarde){
         objC2D.rotate(-2 * Math.PI / 16);
         objC2D.fillRect(10, 18, 5.5, 3.3);
         objC2D.restore();
+
         objC2D.save();
         objC2D.rotate(-2 * Math.PI / 8);
         objC2D.fillRect(5, 22, 5, 3.3);
         objC2D.restore();
 
-        objC2D.restore();
     } 
 }
 

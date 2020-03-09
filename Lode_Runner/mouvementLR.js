@@ -8,7 +8,12 @@ function gererClavier() {
     
    //Empecher de bouger et commencer la partie si GameOver
     if(!objPointage.binFinPartie){
-
+        
+        //Permet d'avoir un certain délais entre la fin du niveau/mort de lode Runner
+        // et le début du nouvel essai
+        if(objNiveau.pause){
+            return false;
+        }
         //Appuyer sur une touche pour débuter le jeu
         //Sans cette instruction, le temps démarre au chargement du niveau
         if(objPointage.binEnMarche == false){
@@ -249,7 +254,6 @@ function trouerPasserelle(){
 }
 
 function mettreAJourTrous(){
-    //ICI on doit ajouter 1 au compteur des trous chaque seconde
     if(tabTrous.length > 0){
         for(let i =0; i<tabTrous.length;i++){
             const trou = tabTrous[i];
@@ -261,7 +265,8 @@ function mettreAJourTrous(){
             }
             if(trou[2] == 8){
                 mettreObjet(trou[1],trou[0],'=');
-                tabTrous.shift();
+                //tabTrous.shift();
+                tabTrous.splice(i,1);
             }
         }
     }

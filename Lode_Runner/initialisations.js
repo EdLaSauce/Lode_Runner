@@ -101,7 +101,8 @@ function initObjTabGardes(){
         objGarde.binLingot = false;
         objGarde.etat = 0;
         objGarde.strCouleur = tabCouleur[i]; // Couleur différente pour chaque garde ?
-        objGarde.vitesse = largeurCellule/20;
+        //objGarde.vitesse = largeurCellule/20;
+        objGarde.vitesse = largeurCellule/30;
         objGarde.intDirection = 1;
         objGarde.intNbDeplacementH=0;
         objGarde.intNbDeplacementV=0;
@@ -124,6 +125,7 @@ function initObjNiveau(){
      beton = 'B'
      Lode Runner ='L'
     */
+    objNiveau.pause = false;
     objNiveau.numero = 1;
     objNiveau.scoreNiveau = 0;
     objNiveau.lingots = 6;

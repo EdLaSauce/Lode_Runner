@@ -72,7 +72,7 @@ function initObjLodeRunner(){
     objLodeRunner.posX = cellulesX/2 * largeurCellule+50;
     objLodeRunner.posY = 14*hauteurCellule +50;
     objLodeRunner.nbVies = 5;
-    objLodeRunner.vitesse = largeurCellule/4;
+    objLodeRunner.vitesse = Math.round(largeurCellule/4);
     //objLodeRunner.strCouleur = 'cornflowerblue';
     objLodeRunner.strCouleur = 'white';
     objLodeRunner.etat = 0;
@@ -86,10 +86,6 @@ function initObjTabGardes(){
     tabObjGardes = new Array();
 
     let nbGardes = objNiveau.numero +2;
-    
-    /* A fin de tests uniquement */
-    //let nbGardes = 1;
-    /* */
 
     let objGarde = null;
     const tabCouleur = ['red','blue','green','OrangeRed','brown','indigo','lime'];
@@ -100,9 +96,8 @@ function initObjTabGardes(){
         assignerPosition(objGarde);
         objGarde.binLingot = false;
         objGarde.etat = 0;
-        objGarde.strCouleur = tabCouleur[i]; // Couleur différente pour chaque garde ?
-        //objGarde.vitesse = largeurCellule/20;
-        objGarde.vitesse = largeurCellule/30;
+        objGarde.strCouleur = tabCouleur[i];
+        objGarde.vitesse = Math.round(largeurCellule/30);
         objGarde.intDirection = 1;
         objGarde.intNbDeplacementH=0;
         objGarde.intNbDeplacementV=0;

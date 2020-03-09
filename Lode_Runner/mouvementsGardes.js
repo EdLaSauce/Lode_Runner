@@ -208,7 +208,9 @@ function bougerVersLodeRunner(objGarde){
                 objGarde.etat = 3;
             }else if(objNiveau.tableau[numCelluleY+1][numCelluleX] == 'T'){
                 objGarde.etat = 2;
-                binPeutBouger =false;
+                //binPeutBouger =false;
+            }else if(objNiveau.tableau[numCelluleY+1][numCelluleX] == ' '){
+                objGarde.etat =2;
             }
             
             if(binPeutBouger){
@@ -238,6 +240,7 @@ function bougerVersLodeRunner(objGarde){
             if(objNiveau.tableau[numCelluleY+1][numCelluleX+objGarde.intDirection]=='='){
                 objGarde.etat = 0;
             }else if(objNiveau.tableau[numCelluleY+1][numCelluleX+objGarde.intDirection]=='T'){
+                
                 objGarde.etat  =2;
             }
        }
@@ -267,13 +270,15 @@ function chuteGarde(objGarde){
                 objGarde.posY = numCelluleY * 30 +50;
                 objGarde.etat = 3;
             }else if(objNiveau.tableau[numCelluleY][numCelluleX] == 'T'){
+                console.log("dans un trou");
+                mettreObjet(numCelluleX,numCelluleY,'G');
                 objGarde.posY = numCelluleY * 30 + 50;
                 //Compter puis sortir du trou
                 if(objSons.gardeDansTrou.duration > 0){
                     objSons.gardeDansTrou.currentTime = 0;
                 }
                 objSons.gardeDansTrou.play();
-                mettreObjet(numCelluleX,numCelluleY,'G');
+                
                 if(objGarde.binLingot){
                     mettreObjet(numCelluleX,numCelluleY-1,'*');
                     objGarde.binLingot = false;
@@ -292,11 +297,13 @@ function chuteGarde(objGarde){
     }else if(objGarde.etat ==1){
         if(objNiveau.tableau[Math.ceil((objGarde.posY-50)/30)][numCelluleX] == 'G'){
             //le garde est pris dans le trou
-            objGarde.posY = objGarde.posY - (objGarde.vitesse/2);
-        }else if(objNiveau.tableau[Math.floor((objGarde.posY-50)/30)+1][numCelluleX] == 'G'){
+            objGarde.posY = objGarde.posY - objGarde.vitesse;
+            console.log("Dans trou fltY: "+objGarde.posY);
+        }else if(objNiveau.tableau[(Math.floor((objGarde.posY-50)/30))+1][numCelluleX] == 'G'){
             objGarde.posY = Math.floor((objGarde.posY-50)/30)*30 + 50;
             objGarde.etat = 0;
             console.log("Sorti du trou fltY: "+objGarde.posY);
+            //mettreObjet(Math.floor((objGarde.posX-50)/30),Math.floor((objGarde.posY-50)/30),'T');
         }
     }
 }
@@ -333,8 +340,8 @@ function collision(objGarde){
 function mettreAJourPositionGardes(){
     if(objPointage.binEnMarche){
         for(let i = 0; i< tabObjGardes.length; i++){
-            bougerVersLodeRunner(tabObjGardes[i]);
             chuteGarde(tabObjGardes[i]);
+            bougerVersLodeRunner(tabObjGardes[i]);
             collision(tabObjGardes[i]);
             mortGarde(tabObjGardes[i]);
         }

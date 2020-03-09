@@ -106,11 +106,9 @@ function hautBas(){
         }
 
         if(objNiveau.tableau[numCelluleY+1][numCelluleX] == '#' && objNiveau.tableau[numCelluleY][numCelluleX]!='#'){
-            console.log("En haut?");
             objLodeRunner.posY = numCelluleY * 30 +50;
             objLodeRunner.etat = 0;
         }else if(objNiveau.tableau[numCelluleY][numCelluleX] == '='){
-            console.log("En bas ?");
             objLodeRunner.posY = (numCelluleY-1) * 30 + 50;
             objLodeRunner.etat = 0;
             //TODO: paufiner le 'snaping', car ça prend un keydown de plus pour 'descendre' de l'échelle
@@ -174,7 +172,6 @@ function gaucheDroite(){
     // Vérifier qu'aucun obstacle est dans le chemin
     if(objNiveau.tableau[numCelluleY][numCelluleX] == '='){
         binPeutBouger = false;
-        //TODO: ajuster la position X
     }
 
     //TODO: planifier à partir d'une échelle aller sur barre franchissement
@@ -183,18 +180,15 @@ function gaucheDroite(){
     if(objNiveau.tableau[numCelluleY+1][numCelluleX] == ' ' || 
             objNiveau.tableau[numCelluleY+1][numCelluleX] == 'T'){
         if(objNiveau.tableau[numCelluleY][numCelluleX] == '-'){
-            console.log("Je suis sur la barre de franchissement");
             objLodeRunner.etat = 3;
         }else{
-            console.log("Je tombe");
             binPeutBouger = false;
             //Mettre coordonnées de lode runner au milieu de la cellule
             // avant de tomber
             objLodeRunner.posX = numCelluleX * 30 + 50;
             objLodeRunner.etat = 2;
         }
-    }else if(objNiveau.tableau[numCelluleY+1][numCelluleX] == '='){
-        console.log("Je marche sur une plateforme");
+    }else if(objNiveau.tableau[numCelluleY+1][numCelluleX] == '=' || objNiveau.tableau[numCelluleY+1][numCelluleX] == 'G'){
         objLodeRunner.etat = 0;
     }
 
@@ -229,6 +223,7 @@ function trouerPasserelle(){
                     [2] : temps depuis création (compteur)
                 */
                 tabTrous.push([numCelluleYTrouer,numCelluleXTrouer,0]);
+                mettreObjet(numCelluleXTrouer,numCelluleYTrouer,'T');
                 if(objSons.creuserTrou.duration > 0){
                     objSons.creuserTrou.currentTime = 0;
                 }
@@ -237,7 +232,7 @@ function trouerPasserelle(){
                 objLodeRunner.etat = 5;
                 setTimeout(()=>{
                     objLodeRunner.etat =0;
-                },550);
+                },450);
                 console.log("Il y a une passerelle à trouer");
             }
         }
@@ -249,7 +244,7 @@ function mettreAJourTrous(){
         for(let i =0; i<tabTrous.length;i++){
             const trou = tabTrous[i];
             if(trou[2] == 0){
-                mettreObjet(trou[1],trou[0],'T');
+                //mettreObjet(trou[1],trou[0],'T');
             }
             if(trou[2] == 7){
                 objSons.rempliTrou.play();
@@ -289,6 +284,7 @@ function chuter(){
         objLodeRunner.etat = 0;
         objLodeRunner.posY = (numCelluleY-1) *30 + 50
     }
+    console.log("Symbole case chute LR: "+objNiveau.tableau[numCelluleY][numCelluleX]);
 }
 
 

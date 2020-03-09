@@ -51,11 +51,10 @@
 
         function mettreAjourAnimation() {
             mettreAJourPositionLR();
-            mettreAJourPositionGardes();
-            mettreAJourTemps();
             mettreAJourTrous();
+            mettreAJourPositionGardes();
             mortLodeRunner();
-
+            mettreAJourTemps();
         }
 
         // Un cycle d'animation	
@@ -86,7 +85,6 @@
             }
 
             if (objPointage.binFinPartie) {
-                objC2D.restore();
                 dessinerFinPartie();
             }
 

@@ -101,7 +101,8 @@ function initObjTabGardes(){
         objGarde.binLingot = false;
         objGarde.etat = 0;
         objGarde.strCouleur = tabCouleur[i]; // Couleur différente pour chaque garde ?
-        objGarde.vitesse = largeurCellule/20;
+        //objGarde.vitesse = largeurCellule/20;
+        objGarde.vitesse = largeurCellule/30;
         objGarde.intDirection = 1;
         objGarde.intNbDeplacementH=0;
         objGarde.intNbDeplacementV=0;
@@ -124,6 +125,7 @@ function initObjNiveau(){
      beton = 'B'
      Lode Runner ='L'
     */
+    objNiveau.pause = false;
     objNiveau.numero = 1;
     objNiveau.scoreNiveau = 0;
     objNiveau.lingots = 6;
@@ -148,6 +150,7 @@ function initObjNiveau(){
         /*16 */['B','B','B','B','B','B','B','B','B','B','B','B','B','B','B','B','B','B','B','B','B','B','B','B','B','B','B','B']
         ];
     objNiveau.tabEmplacements = new Array();
+    objNiveau.tabReapparition = new Array();
     emplacementsDepart();
     //console.log(objNiveau.tabEmplacements);
 }
@@ -167,6 +170,9 @@ function emplacementsDepart(){
     for(let i=0;i<tableau.length;i++){
         for(let j=0;j<tableau[i].length;j++){
             if(tableau[i][j]=="_"){
+                if(i == 1){
+                    objNiveau.tabReapparition.push([j,i]);
+                }
                 objNiveau.tabEmplacements.push([j,i]);
             }
         }

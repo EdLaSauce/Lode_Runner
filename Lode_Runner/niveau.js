@@ -199,7 +199,10 @@ function niveauReussi() {
     //Re init le niveau
     initObjNiveau();
     objNiveau.numero = niveauSuivant;
-
+    objNiveau.pause = true;
+    setTimeout(()=>{
+        objNiveau.pause = false;
+    },1000);
     //Re init les trous
     tabTrous = new Array();
 
@@ -232,6 +235,11 @@ function mortLodeRunner() {
             secondes = 0;
             initObjNiveau();
             objNiveau.numero = niveau;
+            objNiveau.pause = true;
+            setTimeout(()=>{
+                objNiveau.pause = false;
+            },1000);
+
             tabTrous = new Array();
             initObjLodeRunner();
             objLodeRunner.nbVies = nbVies;

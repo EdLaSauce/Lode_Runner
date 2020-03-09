@@ -1,14 +1,14 @@
 2020-03-03 | Vérifié par: | Parfois certains gardes sont à la même position OU BIEN il en manque un.
 2020-03-03 | Vérifié par: | Lors du passage au niveau suivant, empêcher le joueur d'appuyer sur une touche pour quelque secondes
                                 afin d'empêcher de continuer le niveau sans vouloir.
-2020-03-03 | Vérifié par: | Ajuster le 'snapping' en descendant de l'échelle, car ça peut prendre 2 keyDown
+2020-03-03 | Vérifié par: Caroline | Ajuster le 'snapping' en descendant de l'échelle, car ça peut prendre 2 keyDown
                                 pour bien remettre l'état de LodeRunner à 'marcher'.
-2020-03-03 | Vérifié par: | Considérer changer les Math.round() pour Math.floor() ou Math.ceil()
+2020-03-03 | Vérifié par: Émil| Considérer changer les Math.round() pour Math.floor() ou Math.ceil()
                                 pour mieux détecter les cellules. Math.round() nous situe parfois au milieu
                                 des cellules.
                             Ex: mouvementsLR.js ligne: 124 -- TODO
-2020-03-03 | Vérifié par: | Ajuster l'interaction avec les échelles (gauche droite surtout) (passer d'une barre de franchissement à une
+2020-03-03 | Vérifié par: Caroline | Ajuster l'interaction avec les échelles (gauche droite surtout) (passer d'une barre de franchissement à une
 				            échelle et vise versa )
-2020-03-04 | Vérifié par: | Faire une animation de la création du trou
+2020-03-04 | Vérifié par: Caroline et Émil | Faire une animation de la création du trou
 2020-03-04 | Vérifié par: | Repartir le temps à la fin du niveau dans niveauReussi()
 2020-03-04 | Vérifié par: | Revoir la façon de chuter, car lorsque vis-à-vis un trou dans beton, LR ne tombe pas

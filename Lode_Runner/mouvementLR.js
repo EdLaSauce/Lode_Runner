@@ -120,39 +120,30 @@ function hautBas(){
         niveauReussi();
     }
 
-
     objLodeRunner.intNbDeplacementV=objLodeRunner.intNbDeplacementV+1;
 }
 
 function gaucheDroiteEchelle(){
-    let fltYTemporaire = objLodeRunner.posY + (objLodeRunner.vitesse * objLodeRunner.intDirection);
-    const numCelluleX = Math.round((objLodeRunner.posX-50)/30);
-    const numCelluleY = Math.ceil((fltYTemporaire-50)/30);
+    let fltXTemporaire = objLodeRunner.posX + (objLodeRunner.vitesse * objLodeRunner.intDirection);
+   
+    const numCelluleX = Math.round((fltXTemporaire-50)/30);
+    const numCelluleY = Math.round((objLodeRunner.posY-50)/30);
 
     console.log('X :' + numCelluleX + ' Y : ' + numCelluleY)
 
-   if (objLodeRunner.intDirection == -1){
-        if(objNiveau.tableau[numCelluleY+1][numCelluleX-1] == '='){
+    if (objLodeRunner.etat == 1){
+        if (objNiveau.tableau[numCelluleY+1][numCelluleX-1] == '=' || objNiveau.tableau[numCelluleY+1][numCelluleX+1]=='='){
             objLodeRunner.posY = numCelluleY * 30 +50;
             objLodeRunner.posX =numCelluleX* 30 + 50;
             objLodeRunner.etat=0;
-        }/*else if (objNiveau.tableau[numCelluleY+1][numCelluleX-1] == '-'){
-           // objLodeRunner.posY = numCelluleY*30+50;
-            objLodeRunner.posX =numCelluleX* 30 + 50;
-                objLodeRunner.etat=3;
-        }*/
-    }else if (objLodeRunner.intDirection == 1){
-        if(objNiveau.tableau[numCelluleY+1][numCelluleX+1] == '=' ){
-            objLodeRunner.posX =numCelluleX* 30 + 50;
-            objLodeRunner.etat=0;
-        } /*else if (objNiveau.tableau[numCelluleY+1][numCelluleX+1] == '-'){
-            objLodeRunner.posY = (numCelluleY+1)*30+50;
-            objLodeRunner.posX =numCelluleX* 30 + 50;
-                objLodeRunner.etat=3;
-        }*/
-    }
-    
+        }
 
+        if (objNiveau.tableau[numCelluleY][numCelluleX-1] == '-' || objNiveau.tableau[numCelluleY][numCelluleX+1]=='-'){
+            objLodeRunner.posY = numCelluleY * 30 +50;
+            objLodeRunner.posX =numCelluleX* 30 + 50;
+            objLodeRunner.etat=3;
+        }
+    }
 }
 
 function gaucheDroite(){

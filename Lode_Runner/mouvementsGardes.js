@@ -235,7 +235,6 @@ function bougerVersLodeRunner(objGarde){
                 objGarde.etat = 0;
             }else if(objNiveau.tableau[numCelluleY+1][numCelluleX+objGarde.intDirection]=='T'){
                 objGarde.etat  =2;
-                console.log('prrr')
             }
        }
     }

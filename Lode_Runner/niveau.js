@@ -177,7 +177,6 @@ function echelleSecrete() {
             for (let x = 0; x < cellulesX; x++) {
                 if (objNiveau.tableau[y][x] == '!') {
                     objNiveau.tableau[y][x] = '#';
-                    console.log(x + ", " + y);
                 }
             }
         }

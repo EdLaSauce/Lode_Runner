@@ -74,7 +74,6 @@ function mettreAJourTemps() {
         objPointage.temps = tempsTemp;
 
         millisecondes += intSecEcoulees;
-        //console.log(secondes);
         if (millisecondes>=1002){
             secondes+=1;
             millisecondes=0;

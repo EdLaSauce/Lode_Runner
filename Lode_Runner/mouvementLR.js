@@ -43,35 +43,28 @@ function gererClavier() {
     
             //bas
             case 40:
-                console.log("down arrow");
                 objLodeRunner.intDirection = 1;
                hautBas();
             break;
     
             //haut
             case 38:
-                console.log("up arrow");
                 objLodeRunner.intDirection = -1;
                hautBas();
             break;
     
             //touche Z
             case 90:
-               console.log("Trouer à gauche");
                objLodeRunner.intDirection = -1;
                trouerPasserelle();
             break;
             
             //touche X
             case 88:
-               console.log("Trouer à droite");
                objLodeRunner.intDirection = 1;
                trouerPasserelle();
             break;
         }
-    }else{
-        //On peut permettre de recommencer le jeu si on appuie sur Enter par exemple,
-        //mais pas nécessaire
     }
 }
 
@@ -111,7 +104,6 @@ function hautBas(){
         }else if(objNiveau.tableau[numCelluleY][numCelluleX] == '='){
             objLodeRunner.posY = (numCelluleY-1) * 30 + 50;
             objLodeRunner.etat = 0;
-            //TODO: paufiner le 'snaping', car ça prend un keydown de plus pour 'descendre' de l'échelle
         }
     }
     if(binNiveauReussi){
@@ -126,8 +118,6 @@ function gaucheDroiteEchelle(){
    
     const numCelluleX = Math.round((fltXTemporaire-50)/30);
     const numCelluleY = Math.round((objLodeRunner.posY-50)/30);
-
-    console.log('X :' + numCelluleX + ' Y : ' + numCelluleY)
 
     if (objLodeRunner.etat == 1){
         if (objNiveau.tableau[numCelluleY+1][numCelluleX-1] == '=' || objNiveau.tableau[numCelluleY+1][numCelluleX+1]=='='){
@@ -145,7 +135,6 @@ function gaucheDroiteEchelle(){
 }
 
 function gaucheDroite(){
-   // if (objLodeRunner.etat != 2 ){
      
     let fltXTemporaire = objLodeRunner.posX + (objLodeRunner.vitesse * objLodeRunner.intDirection);
     let binPeutBouger = true;
@@ -174,9 +163,6 @@ function gaucheDroite(){
         binPeutBouger = false;
     }
 
-    //TODO: planifier à partir d'une échelle aller sur barre franchissement
-    //TODO: arreter barre de franchissement vers echelle avant qu'il tombe
-
     if(objNiveau.tableau[numCelluleY+1][numCelluleX] == ' ' || 
             objNiveau.tableau[numCelluleY+1][numCelluleX] == 'T'){
         if(objNiveau.tableau[numCelluleY][numCelluleX] == '-'){
@@ -192,13 +178,10 @@ function gaucheDroite(){
         objLodeRunner.etat = 0;
     }
 
-
-    //TODO : lorsque LR est sur paserelle 4, l'empeche de rentrer à moitié dans le mur
     if(binPeutBouger==true){
         objLodeRunner.posX = fltXTemporaire;
         objLodeRunner.intNbDeplacementH=objLodeRunner.intNbDeplacementH+1;
     }
-//}
 }
 
 function trouerPasserelle(){
@@ -209,7 +192,6 @@ function trouerPasserelle(){
 
     // Si la requête de trouer est dans les limites du jeu
     if(numCelluleXTrouer >=0 && numCelluleXTrouer < 28){
-        //console.log("Cellule a trouer X: "+numCelluleXTrouer+", cellule a trouer Y: "+numCelluleYTrouer);
         //Et que c'est une passerelle
         if(objNiveau.tableau[numCelluleYTrouer][numCelluleXTrouer] == '='){
             // Et rien ne se trouve au dessus
@@ -233,7 +215,6 @@ function trouerPasserelle(){
                 setTimeout(()=>{
                     objLodeRunner.etat =0;
                 },450);
-                console.log("Il y a une passerelle à trouer");
             }
         }
     }
@@ -243,15 +224,11 @@ function mettreAJourTrous(){
     if(tabTrous.length > 0){
         for(let i =0; i<tabTrous.length;i++){
             const trou = tabTrous[i];
-            if(trou[2] == 0){
-                //mettreObjet(trou[1],trou[0],'T');
-            }
             if(trou[2] == 7){
                 objSons.rempliTrou.play();
             }
             if(trou[2] == 8){
                 mettreObjet(trou[1],trou[0],'=');
-                //tabTrous.shift();
                 tabTrous.splice(i,1);
             }
         }
@@ -284,7 +261,6 @@ function chuter(){
         objLodeRunner.etat = 0;
         objLodeRunner.posY = (numCelluleY-1) *30 + 50
     }
-    console.log("Symbole case chute LR: "+objNiveau.tableau[numCelluleY][numCelluleX]);
 }
 
 

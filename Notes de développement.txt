@@ -1,5 +1,5 @@
-2020-03-03 | Vérifié par: | Parfois certains gardes sont à la même position OU BIEN il en manque un.
-2020-03-03 | Vérifié par: | Lors du passage au niveau suivant, empêcher le joueur d'appuyer sur une touche pour quelque secondes
+2020-03-03 | Vérifié par: Émil | Parfois certains gardes sont à la même position OU BIEN il en manque un.
+2020-03-03 | Vérifié par: Émil | Lors du passage au niveau suivant, empêcher le joueur d'appuyer sur une touche pour quelque secondes
                                 afin d'empêcher de continuer le niveau sans vouloir.
 2020-03-03 | Vérifié par: Caroline | Ajuster le 'snapping' en descendant de l'échelle, car ça peut prendre 2 keyDown
                                 pour bien remettre l'état de LodeRunner à 'marcher'.
@@ -10,5 +10,4 @@
 2020-03-03 | Vérifié par: Caroline | Ajuster l'interaction avec les échelles (gauche droite surtout) (passer d'une barre de franchissement à une
 				            échelle et vise versa )
 2020-03-04 | Vérifié par: Caroline et Émil | Faire une animation de la création du trou
-2020-03-04 | Vérifié par: | Repartir le temps à la fin du niveau dans niveauReussi()
-2020-03-04 | Vérifié par: | Revoir la façon de chuter, car lorsque vis-à-vis un trou dans beton, LR ne tombe pas
+2020-03-04 | Vérifié par: Émil | Repartir le temps à la fin du niveau dans niveauReussi()

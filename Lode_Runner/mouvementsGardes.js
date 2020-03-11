@@ -50,12 +50,10 @@ function bougerVersLodeRunner(objGarde){
                 }
             }
         }
-        //console.log("Monter! -> "+"numCelluleBut: "+numCelluleBut)
 
         /*
             Comment procéder selon l'état du garde
         */
-        //if(numCelluleBut != null){
             if(objGarde.etat == 0 || objGarde.etat == 3){
                 //si je marche ou franchi une barre
     
@@ -79,24 +77,14 @@ function bougerVersLodeRunner(objGarde){
                 //je monte une echelle
                 if(objNiveau.tableau[numCelluleY][numCelluleX] == '#'){
                     objGarde.posY = objGarde.posY - objGarde.vitesse;
-                    //objGarde.intNbDeplacementV++;
                 }else if(objNiveau.tableau[numCelluleY+1][numCelluleX]== '#'
                             &&(objNiveau.tableau[numCelluleY][numCelluleX]== ' '
                                 ||objNiveau.tableau[numCelluleY][numCelluleX]=='-')){
                     objGarde.posY = objGarde.posY - objGarde.vitesse;
-                    //objGarde.intNbDeplacementV++;
-                }else if(objNiveau.tableau[numCelluleY][numCelluleX] == 'G' ||
-                            objNiveau.tableau[numCelluleY+1][numCelluleX]=='G'){
-                    //objGarde.posY = objGarde.posY - objGarde.vitesse;
-                    //objGarde.intNbDeplacementV++;
                 }else{
                     objGarde.etat = 0;
                 }
             }
-            //console.log("etat: "+objGarde.etat+", cellule : "+objNiveau.tableau[numCelluleY][numCelluleX]);
-        //}else{
-        //    console.log("pas de cellule but")
-        //}
         
 
     }else if(differenceY > 0){
@@ -134,9 +122,6 @@ function bougerVersLodeRunner(objGarde){
                 }
             }
         }
-
-        //console.log("numCelluleBut:"+numCelluleBut);
-       // console.log("Descendre! -> "+"numCelluleBut: "+numCelluleBut)
        const fltDifferenceX = (numCelluleBut*30 +50)-fltXGarde;
        
 
@@ -162,7 +147,6 @@ function bougerVersLodeRunner(objGarde){
             
             if(objGarde.etat != 2 && objGarde.etat != 1){
                 objGarde.posX = objGarde.posX + (objGarde.vitesse * objGarde.intDirection);
-                //objGarde.intNbDeplacementH++;
             }
         }
         else if(objGarde.etat == 3){
@@ -178,11 +162,6 @@ function bougerVersLodeRunner(objGarde){
             if(objNiveau.tableau[numCelluleY+1][numCelluleX] == '#'){
                 //Il y a une échelle plus bas
                 objGarde.posY = objGarde.posY + objGarde.vitesse;
-                //objGarde.intNbDeplacementV++;
-            }else if(objNiveau.tableau[numCelluleY][numCelluleX] == 'G' ||
-                    objNiveau.tableau[numCelluleY+1][numCelluleX]=='G'){
-                        //objGarde.posY = objGarde.posY - objGarde.vitesse;
-                        //objGarde.intNbDeplacementV++;
             }else if(objNiveau.tableau[numCelluleY+1][numCelluleX] == '='){
                 // il y a une passerelle plus bas
                 objGarde.etat = 0;
@@ -208,32 +187,21 @@ function bougerVersLodeRunner(objGarde){
                 objGarde.etat = 3;
             }else if(objNiveau.tableau[numCelluleY+1][numCelluleX] == 'T'){
                 objGarde.etat = 2;
-                //binPeutBouger =false;
             }else if(objNiveau.tableau[numCelluleY+1][numCelluleX] == ' '){
                 objGarde.etat =2;
             }
             
             if(binPeutBouger){
                 objGarde.posX = objGarde.posX + (objGarde.vitesse * objGarde.intDirection);
-                //objGarde.intNbDeplacementH++;
-                console.log("vers LR");
-            }else{
-                console.log("Bloqué");
             }
         
        }else if(objGarde.etat == 1){
-           console.log("etat garde: "+objGarde.etat);
-           console.log("cell: "+objNiveau.tableau[numCelluleY+1][numCelluleX+objGarde.intDirection]);
            if(objNiveau.tableau[numCelluleY+1][numCelluleX+objGarde.intDirection] == '='
                 ||objNiveau.tableau[numCelluleY+1][numCelluleX+objGarde.intDirection]=='T'
                     ||objNiveau.tableau[numCelluleY+1][numCelluleX+objGarde.intDirection]=='G'){
-               //Y a-t-il une plateforme à gauche/droite?
                objGarde.etat = 0;
-               //console.log("Passerelle gauche/droite");
            }else if(objNiveau.tableau[numCelluleY][numCelluleX+objGarde.intDirection] == '-'){
-               //Y a-t-il une barre de franchissement à gauche/droite?
                 objGarde.etat = 3;
-                //console.log("Barre franchissement gauche/droite");
            }
        }else if(objGarde.etat == 3){
             objGarde.posX = objGarde.posX + (objGarde.vitesse * objGarde.intDirection);
@@ -269,7 +237,6 @@ function chuteGarde(objGarde){
                 objGarde.posY = numCelluleY * 30 +50;
                 objGarde.etat = 3;
             }else if(objNiveau.tableau[numCelluleY][numCelluleX] == 'T'){
-                console.log("dans un trou");
                 mettreObjet(numCelluleX,numCelluleY,'G');
                 objGarde.posY = numCelluleY * 30 + 50;
                 //Compter puis sortir du trou
@@ -297,33 +264,24 @@ function chuteGarde(objGarde){
         if(objNiveau.tableau[Math.ceil((objGarde.posY-50)/30)][numCelluleX] == 'G'){
             //le garde est pris dans le trou
             objGarde.posY = objGarde.posY - objGarde.vitesse;
-            //console.log("Dans trou fltY: "+objGarde.posY);
-            //console.log(objNiveau.tableau[(Math.floor((objGarde.posY-50)/30))][numCelluleX]);
         }else if(objNiveau.tableau[((Math.floor((objGarde.posY-50)/30))+1)][numCelluleX] == 'G'){
             objGarde.posY = Math.floor((objGarde.posY-50)/30)*30 + 50;
             objGarde.etat = 0;
-            console.log("Sorti du trou fltY: "+objGarde.posY);
-            //mettreObjet(numCelluleX,Math.floor((objGarde.posY-50)/30)+1,'T');
-            //console.log(objNiveau.tableau[(Math.floor((objGarde.posY-50)/30)+1)][numCelluleX]);
         }
     }
 }
 
 function mortGarde(objGarde){
     if(objGarde.etat == 4){
-        console.log("Garde est mort");
         if(objSons.gardeMort.duration >0){
             objSons.gardeMort.currentTime = 0;
         }
         objSons.gardeMort.play();
-        //setTimeout(()=>{
-            //respawn
-            let random = Math.floor(Math.random()*objNiveau.tabReapparition.length);
-            objGarde.posX = objNiveau.tabReapparition[random][0] * largeurCellule + 50;
-            objGarde.posY = objNiveau.tabReapparition[random][1] * hauteurCellule + 50;
-            objNiveau.scoreNiveau += 75;
-            objGarde.etat =0;
-        //},350);
+        let random = Math.floor(Math.random()*objNiveau.tabReapparition.length);
+        objGarde.posX = objNiveau.tabReapparition[random][0] * largeurCellule + 50;
+        objGarde.posY = objNiveau.tabReapparition[random][1] * hauteurCellule + 50;
+        objNiveau.scoreNiveau += 75;
+        objGarde.etat =0;
     }
 }
 
@@ -338,11 +296,31 @@ function collision(objGarde){
     }
 }
 
+function relacherLingots(objGarde){
+    const random = Math.floor(Math.random() * 4000);
+    if(objGarde.binLingot == true){
+        if(random == 600){
+            const numCelluleX = Math.round((objGarde.posX - 50)/30);
+            const numCelluleY = Math.round((objGarde.posY-50)/30);
+            if(objNiveau.tableau[numCelluleY+1][numCelluleX-objGarde.intDirection]== '='&&
+                (objNiveau.tableau[numCelluleY][numCelluleX-objGarde.intDirection] == '_' ||
+                    objNiveau.tableau[numCelluleY][numCelluleX-objGarde.intDirection]== ' ')){
+
+                mettreObjet(numCelluleX-objGarde.intDirection,numCelluleY,'*');
+                objGarde.binLingot = false;
+            }
+        }
+    }
+    
+    
+}
+
 function mettreAJourPositionGardes(){
     if(objPointage.binEnMarche){
         for(let i = 0; i< tabObjGardes.length; i++){
             chuteGarde(tabObjGardes[i]);
             bougerVersLodeRunner(tabObjGardes[i]);
+            relacherLingots(tabObjGardes[i]);
             collision(tabObjGardes[i]);
             mortGarde(tabObjGardes[i]);
         }

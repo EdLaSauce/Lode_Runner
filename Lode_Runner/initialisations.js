@@ -1,8 +1,5 @@
 function initPointage(){
-    //const date = new Date();
-   
     objPointage = new Object();
-    //objPointage.temps= date.getTime();
     objPointage.temps = new Date().getTime();
     objPointage.binEnMarche=false;
     objPointage.scoreCumul = 0;
@@ -73,7 +70,6 @@ function initObjLodeRunner(){
     objLodeRunner.posY = 14*hauteurCellule +50;
     objLodeRunner.nbVies = 5;
     objLodeRunner.vitesse = Math.round(largeurCellule/4);
-    //objLodeRunner.strCouleur = 'cornflowerblue';
     objLodeRunner.strCouleur = 'white';
     objLodeRunner.etat = 0;
     objLodeRunner.intDirection = 0;
@@ -147,7 +143,6 @@ function initObjNiveau(){
     objNiveau.tabEmplacements = new Array();
     objNiveau.tabReapparition = new Array();
     emplacementsDepart();
-    //console.log(objNiveau.tabEmplacements);
 }
 
 function initTabTrous(){

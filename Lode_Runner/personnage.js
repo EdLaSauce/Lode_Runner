@@ -520,15 +520,12 @@ function dessinerJet() {
     const milieuXLodeRunner = objLodeRunner.posX + largeurCellule / 2;
     const milieuYLodeRunner = objLodeRunner.posY + hauteurCellule / 2;
     objC2D.fillStyle = 'yellow';
-    //objC2D.translate(milieuXLodeRunner,milieuYLodeRunner);
     objC2D.beginPath();
     objC2D.moveTo(milieuXLodeRunner, milieuYLodeRunner);
     objC2D.lineTo(numCelluleXTrouer * 30 + 50, numCelluleYTrouer * 30 + 50);
     objC2D.lineTo(numCelluleXTrouer * 30 + 50 + 30, numCelluleYTrouer * 30 + 50);
     objC2D.closePath();
     objC2D.fill();
-    //objC2D.translate(numCelluleXTrouer*30+50,numCelluleYTrouer*30+50);
-    //console.log("Je dessine un jet à "+numCelluleXTrouer*30+50+","+numCelluleYTrouer*30+50);
 
     objC2D.restore();
 }

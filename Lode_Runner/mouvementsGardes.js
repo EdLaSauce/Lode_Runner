@@ -237,10 +237,9 @@ function bougerVersLodeRunner(objGarde){
            }
        }else if(objGarde.etat == 3){
             objGarde.posX = objGarde.posX + (objGarde.vitesse * objGarde.intDirection);
-            if(objNiveau.tableau[numCelluleY+1][numCelluleX+objGarde.intDirection]=='='){
+            if(objNiveau.tableau[numCelluleY+1][numCelluleX]=='='){
                 objGarde.etat = 0;
-            }else if(objNiveau.tableau[numCelluleY+1][numCelluleX+objGarde.intDirection]=='T'){
-                
+            }else if(objNiveau.tableau[numCelluleY+1][numCelluleX]=='T'){
                 objGarde.etat  =2;
             }
        }
@@ -298,12 +297,14 @@ function chuteGarde(objGarde){
         if(objNiveau.tableau[Math.ceil((objGarde.posY-50)/30)][numCelluleX] == 'G'){
             //le garde est pris dans le trou
             objGarde.posY = objGarde.posY - objGarde.vitesse;
-            console.log("Dans trou fltY: "+objGarde.posY);
-        }else if(objNiveau.tableau[(Math.floor((objGarde.posY-50)/30))+1][numCelluleX] == 'G'){
+            //console.log("Dans trou fltY: "+objGarde.posY);
+            //console.log(objNiveau.tableau[(Math.floor((objGarde.posY-50)/30))][numCelluleX]);
+        }else if(objNiveau.tableau[((Math.floor((objGarde.posY-50)/30))+1)][numCelluleX] == 'G'){
             objGarde.posY = Math.floor((objGarde.posY-50)/30)*30 + 50;
             objGarde.etat = 0;
             console.log("Sorti du trou fltY: "+objGarde.posY);
-            //mettreObjet(Math.floor((objGarde.posX-50)/30),Math.floor((objGarde.posY-50)/30),'T');
+            //mettreObjet(numCelluleX,Math.floor((objGarde.posY-50)/30)+1,'T');
+            //console.log(objNiveau.tableau[(Math.floor((objGarde.posY-50)/30)+1)][numCelluleX]);
         }
     }
 }
